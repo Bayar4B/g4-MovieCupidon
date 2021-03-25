@@ -1,0 +1,22 @@
+stages:
+ - build
+ - test
+
+build:
+  stage: build
+  image: node:latest
+  # only:
+  #   - master
+  script:
+    - npm install -g @angular/cli
+    - npm install
+    - ng build 
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 2 days
+  cache:
+    paths:
+      - node_modules/
+
+

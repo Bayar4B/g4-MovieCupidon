@@ -1,7 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [];
+import { HomeComponent } from './home';
+import { LobbyComponent } from './lobby';
+import { MatchmakingComponent } from './matchmaking';
+
+const routes: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'lobby', component: LobbyComponent },
+  { path: 'matchmaking', component: MatchmakingComponent},
+
+  // otherwise redirect to home
+  { path: '**', redirectTo: ''}
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

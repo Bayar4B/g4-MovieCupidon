@@ -23,8 +23,8 @@ Les branches telles que `Master` et `Develop` sont des branches protégées et n
 Il faut faire des merges requests pour proposer un changement.
 
 Les noms des branches doivent respecter ce format :
--  Features : feat/\<nom-du-feature>
--  Sous-tâches : feat/\<nom-du-feature>/<nom-de-la-sous-tâche>  
+-  Features : feat_\<nom-du-feature>
+-  Sous-tâches : feat_\<nom-du-feature>_<nom-de-la-sous-tâche-(ou-nom-de-la-personne-travaillant)>  
 
 Les branches features sont des branches qui viennent de la branche `Develop`.
 Les branches sous-tâches sont des branches qui viennent de la branche `Features`.

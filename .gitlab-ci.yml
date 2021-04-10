@@ -2,6 +2,10 @@ stages:
  - build
  - test
 
+cache:
+    paths:
+      - node_modules/
+
 build:
   stage: build
   image: node:latest
@@ -15,9 +19,20 @@ build:
     paths:
       - dist/
     expire_in: 2 days
-  cache:
+
+test:
+  image: trion/ng-cli-karma
+  stage: test
+  before_script:
+    - yarn global add @angular/cli
+    - yarn install
+  script:
+    - yarn add @angular-devkit/build-angular --dev
+    - ng test --no-watch --code-coverage
+    - ng e2e
+  artifacts:
     paths:
-      - node_modules/
+      - coverage/
 
 test:
   image: trion/ng-cli-karma

@@ -19,4 +19,15 @@ build:
     paths:
       - node_modules/
 
+test:
+  image: trion/ng-cli-karma
+  stage: test
+  script:
+    - yarn add @angular-devkit/build-angular --dev
+    - ng test --no-watch --code-coverage
+    - ng e2e
+  artifacts:
+    paths:
+      - coverage/
+
 

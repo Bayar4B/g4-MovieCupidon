@@ -1,0 +1,7 @@
+version: "3"
+
+services:
+    web:
+        image: movieCupidon-frontend
+        ports:
+            - "8093:80"

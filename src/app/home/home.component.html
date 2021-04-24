@@ -17,7 +17,6 @@
     font-size: x-large;
     text-align: center;
     line-height: 124px;
-
     width: 265px;
     height: 124px;
     background: #DC4545;
@@ -27,12 +26,26 @@
     transform: rotate(0.27deg);
   }
 
+
+
 </style>
 
-<div class="container">
-    <a class="button" mat-stroked-button routerLink="lobby">Create Game</a>
-    <a class="button" mat-stroked-button routerLink="lobby">Join Game</a>
+
+<div class="container" *ngIf="this.state === 'buttons'">
+  <div class="button" *ngIf="this.state" (click)="this.state = 'create'">Create Game</div>
+  <div class="button" *ngIf="this.state" (click)="this.state = 'join'">Join Game</div>
+  <app-formulaire-create *ngIf="this.state === 'create'"></app-formulaire-create>
+  <app-formulaire-join *ngIf="this.state === 'join'"></app-formulaire-join>
+  <div class="button" *ngIf="state !== 'buttons'" (click)="this.state = 'buttons'">Go Back</div>
+
+
+  <!--<a class="button" mat-stroked-button routerLink="lobby">Create Game</a>
+  <a class="button" mat-stroked-button routerLink="lobby">Join Game</a>-->
+
 </div>
+
+
+
 
 
 

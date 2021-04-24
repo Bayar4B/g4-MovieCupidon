@@ -12,6 +12,13 @@ import { HomeComponent } from './home';
 import { LobbyComponent } from './lobby';
 import { MatchmakingComponent } from './matchmaking';
 
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { FormulaireCreateComponent } from './home/formulaire-create/formulaire-create.component';
+import { FormulaireJoinComponent } from './home/formulaire-join/formulaire-join.component';
+import {MatGridList, MatGridListModule} from '@angular/material/grid-list';
+import {MatListModule} from '@angular/material/list';
+
 
 
 @NgModule({
@@ -19,7 +26,9 @@ import { MatchmakingComponent } from './matchmaking';
     AppComponent,
     HomeComponent,
     LobbyComponent,
-    MatchmakingComponent
+    MatchmakingComponent,
+    FormulaireCreateComponent,
+    FormulaireJoinComponent
   ],
   imports: [
     BrowserModule,
@@ -29,6 +38,10 @@ import { MatchmakingComponent } from './matchmaking';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatGridListModule,
+    MatListModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

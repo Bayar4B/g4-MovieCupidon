@@ -6,11 +6,13 @@
   justify-content: center;
   width: 100vw;
   min-height: 100vh;
-  /*background-image: url("https://static.hitek.fr/img/up_m/1453509909/films.png");*/
+  background-image: url("https://static.hitek.fr/img/up_m/1453509909/films.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  background-image: url("https://live.staticflickr.com/5043/5300777227_aa6cf1ab77_c.jpg");
+  padding-bottom: 10px;
+  padding-top: 10px;
+  /*background-image: url("https://live.staticflickr.com/5043/5300777227_aa6cf1ab77_c.jpg");*/
 }
 
 .grid {
@@ -34,17 +36,14 @@ h1 {
 }
 
 body {
+  color: #FAFAFA;
   font-family: OpenSans;
   font-size: 50px;
   font-weight: 400;
   font-style: normal;
 }
 
-.card{
-  max-width: 500px;
-  margin: 10px;
-}
-
 /*the end: https://www.vecteezy.com/vector-art/156687-classic-movie-end-screen-vector*/
+/*design 1: https://live.staticflickr.com/27/39818201_93b63ee250_b.jpg*/
 
 

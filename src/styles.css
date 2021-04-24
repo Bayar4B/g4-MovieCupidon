@@ -2,3 +2,21 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-form-field-label {
+  color: #FAFAFA !important;
+}
+
+.mat-form-field-underline{
+  background-color: #FAFAFA !important;
+  color: #FAFAFA !important;
+}
+
+.mat-pseudo-checkbox{
+  color: #FAFAFA;
+  background-color: #DC4545;
+}
+
+.text{
+  color: #FAFAFA;
+}

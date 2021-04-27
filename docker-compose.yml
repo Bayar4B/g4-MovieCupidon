@@ -2,6 +2,6 @@ version: "3"
 
 services:
     web:
-        image: movieCupidon-frontend
+        image: bayar4b/movie-cupidon-frontend #movieCupidon-frontend
         ports:
             - "8093:80"

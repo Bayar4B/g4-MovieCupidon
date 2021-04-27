@@ -5,19 +5,34 @@
     color: #FAFAFA;
   }
 
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  mat-form-field.mat-form-field {
+    font-size: 20px;
+  }
+
 </style>
 
+<div class="form-container">
+  <mat-form-field class="input">
+    <mat-label>Username</mat-label>
+    <label>
+      <input matInput placeholder="Ex: NOA18">
+    </label>
+  </mat-form-field>
 
-<mat-form-field class="input">
-  <mat-label>Username</mat-label>
-  <label>
-    <input matInput placeholder="Ex: NOA18">
-  </label>
-</mat-form-field>
+  <mat-form-field class="input">
+    <mat-label>Token</mat-label>
+    <label>
+      <input matInput placeholder="Ex: U1B6X">
+    </label>
+  </mat-form-field>
 
-<mat-form-field class="input">
-  <mat-label>Token</mat-label>
-  <label>
-    <input matInput placeholder="Ex: U1B6X">
-  </label>
-</mat-form-field>
+
+</div>
+

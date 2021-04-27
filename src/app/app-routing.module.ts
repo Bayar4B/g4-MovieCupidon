@@ -8,7 +8,7 @@ import { MatchmakingComponent } from './matchmaking';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'lobby', component: LobbyComponent },
-  { path: 'matchmaking', component: MatchmakingComponent},
+  { path: 'lobby/matchmaking', component: MatchmakingComponent},
 
   // otherwise redirect to home
   { path: '**', redirectTo: ''}

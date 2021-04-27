@@ -17,20 +17,20 @@ $md-mcgpalette0: (
   A400 : #ff6969,
   A700 : #ff4f4f,
   contrast: (
-    50 : #000000,
-    100 : #000000,
-    200 : #000000,
-    300 : #000000,
+    50 : #ffffff,
+    100 : #ffffff,
+    200 : #ffffff,
+    300 : #ffffff,
     400 : #ffffff,
     500 : #ffffff,
     600 : #ffffff,
     700 : #ffffff,
     800 : #ffffff,
     900 : #ffffff,
-    A100 : #000000,
-    A200 : #000000,
-    A400 : #000000,
-    A700 : #000000,
+    A100 : #ffffff,
+    A200 : #ffffff,
+    A400 : #ffffff,
+    A700 : #ffffff,
   )
 );
 
@@ -50,27 +50,36 @@ $md-mcgpalette1: (
   A400 : #ff9696,
   A700 : #ff7d7d,
   contrast: (
-    50 : #000000,
-    100 : #000000,
-    200 : #000000,
-    300 : #000000,
-    400 : #000000,
+    50 : #ffffff,
+    100 : #ffffff,
+    200 : #ffffff,
+    300 : #ffffff,
+    400 : #ffffff,
     500 : #ffffff,
     600 : #ffffff,
     700 : #ffffff,
     800 : #ffffff,
     900 : #ffffff,
-    A100 : #000000,
-    A200 : #000000,
-    A400 : #000000,
-    A700 : #000000,
+    A100 : #ffffff,
+    A200 : #ffffff,
+    A400 : #ffffff,
+    A700 : #ffffff,
   )
 );
 
-$mc-theme-primery: mat-palette($md-mcgpalette0);
+$mc-theme-primary: mat-palette($md-mcgpalette0);
 $mc-theme-accent: mat-palette($md-mcgpalette1);
 
-$mc-theme: mat-light-theme($md-mcgpalette0, $md-mcgpalette1);
-@include angular-material-theme($mc-theme)
+$mc-app-theme: mat-light-theme((
+  color: (
+    primary: $mc-theme-primary,
+    accent: $mc-theme-accent,
+  )
+));
+
+
+//$mc-theme: mat-light-theme($md-mcgpalette0, $md-mcgpalette1);
+//@include angular-material-theme($mc-theme);
+@include angular-material-theme($mc-app-theme);
 
 

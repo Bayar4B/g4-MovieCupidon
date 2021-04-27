@@ -18,6 +18,9 @@ import { FormulaireCreateComponent } from './home/formulaire-create/formulaire-c
 import { FormulaireJoinComponent } from './home/formulaire-join/formulaire-join.component';
 import {MatGridList, MatGridListModule} from '@angular/material/grid-list';
 import {MatListModule} from '@angular/material/list';
+import {MatIconModule} from '@angular/material/icon';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 
@@ -42,6 +45,9 @@ import {MatListModule} from '@angular/material/list';
     MatInputModule,
     MatGridListModule,
     MatListModule,
+    MatIconModule,
+    MatProgressBarModule,
+    MatTooltipModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

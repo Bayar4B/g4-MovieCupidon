@@ -1,7 +1,6 @@
-
 <style>
   .container {
-    display:flex;
+    display: flex;
     padding: 100px 0;
     flex-direction: row;
     align-items: stretch;
@@ -9,20 +8,17 @@
     justify-content: center;
   }
 
-  mat-grid-tile {
-    background: #DC4545;
-    width: 50vw;
-    height: 50vh;
-    border-radius: 31px;
-    opacity: 0.9;
-    justify-content: space-around;
-
+  .items-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
+
   .info-container {
-    display:flex;
-    width: 40vh;
-    min-height: 50vh;
+    display: flex;
+    min-height: 40vh;
+    min-width: 10vh;
     margin: 0 32px;
     flex-direction: column;
     flex-wrap: wrap;
@@ -35,7 +31,7 @@
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25), 0 4px 4px rgba(0, 0, 0, 0.25);
   }
 
-  .button{
+  .button {
     color: #FAFAFA;
     font-size: x-large;
     text-align: center;
@@ -49,39 +45,71 @@
     transform: rotate(0.27deg);
   }
 
+  .list-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+  }
+
+ .text-color {
+   color: #FAFAFA; !important;
+ }
+
+  .card-style {
+    background-color: #dc4545;
+    opacity: 0.8;
+    border-radius: 31px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25), 0 4px 4px rgba(0, 0, 0, 0.25);
+  }
+
+  .button-container {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .tooltip-color {
+    background-color: #a20a0a;
+  }
+
+
 </style>
 
-<div class="container">
-  <div class="info-container">
-    <mat-list>
-      <mat-list-item>User1</mat-list-item>
-      <mat-divider></mat-divider>
-      <mat-list-item>User2</mat-list-item>
-      <mat-divider></mat-divider>
-      <mat-list-item>User3</mat-list-item>
-      <mat-divider></mat-divider>
-    </mat-list>
+<div class="items-container">
+  <div class="container">
+    <div class="info-container">
+
+      <mat-list>
+        <mat-list-item class="text-color">User1</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item class="text-color">User2</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item class="text-color">User3</mat-list-item>
+        <mat-divider></mat-divider>
+      </mat-list>
+    </div>
+
+
+      <mat-card class="card-style">
+        <mat-selection-list>
+          <div class="list-wrapper">
+            <mat-list-option class="text-color" *ngFor="let film of genres; let i = index" >
+              <img mat-card-avatar src="{{genres[i].img}}"/>
+              <!--{{genres[i].name}}-->
+            </mat-list-option>
+          </div>
+        </mat-selection-list>
+      </mat-card>
+
   </div>
-  <div class="info-container">
-    <mat-selection-list>
-      <mat-list-option *ngFor="let film of typesOfFilms">
-        {{film}}
-      </mat-list-option>
-    </mat-selection-list>
+  <div class="button-container">
+    <a class="button" mat-stroked-button routerLink="matchmaking">Start</a>
+    <button mat-icon-button matTooltip="Copy link" matTooltipClass="tooltip-color">
+      <mat-icon>filter_none</mat-icon>
+    </button>
   </div>
+
+
 </div>
-<div class="container">
-  <a class="button" mat-stroked-button routerLink="matchmaking">Enter</a>
-</div>
 
-
-
-<!--<mat-grid-list cols="2" rowHeight="100px" gutterSize="10px">
-  <mat-grid-tile>
-    <mat-action-list>Users</mat-action-list>
-  </mat-grid-tile>
-  <mat-grid-tile>Parameters
-  </mat-grid-tile>
-</mat-grid-list>-->
 
 

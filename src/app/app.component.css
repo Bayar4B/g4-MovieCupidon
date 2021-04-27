@@ -1,4 +1,6 @@
-
+* {
+  box-sizing: border-box;
+}
 .bg {
   display: flex;
   flex-direction: column;
@@ -8,10 +10,11 @@
   min-height: 100vh;
   background-image: url("https://static.hitek.fr/img/up_m/1453509909/films.png");
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: auto 100vh;
+  background-attachment: fixed;
   background-size: cover;
-  padding-bottom: 10px;
-  padding-top: 10px;
+  padding-bottom: 00px;
+  padding-top: 200px;
   /*background-image: url("https://live.staticflickr.com/5043/5300777227_aa6cf1ab77_c.jpg");*/
 }
 
@@ -23,6 +26,7 @@
   flex-basis: 100%;
   padding: 100px 0;
   background-color: rgba(196, 29, 29, 0.94);
+  margin-bottom: 100px;
 }
 
 
@@ -35,13 +39,6 @@ h1 {
   text-align: center;
 }
 
-body {
-  color: #FAFAFA;
-  font-family: OpenSans;
-  font-size: 50px;
-  font-weight: 400;
-  font-style: normal;
-}
 
 /*the end: https://www.vecteezy.com/vector-art/156687-classic-movie-end-screen-vector*/
 /*design 1: https://live.staticflickr.com/27/39818201_93b63ee250_b.jpg*/

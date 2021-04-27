@@ -1,6 +1,11 @@
 stages:
  - build
  - test
+ - deploy
+
+cache:
+    paths:
+      - node_modules/
 
 build:
   stage: build
@@ -14,9 +19,6 @@ build:
   artifacts:
     paths:
       - dist/
-  cache:
-    paths:
-      - node_modules/
 
 test:
   image: trion/ng-cli-karma
@@ -31,5 +33,17 @@ test:
   artifacts:
     paths:
       - coverage/
+
+deploy:
+  dependencies:
+    - build
+  image: docker:latest
+  stage: deploy
+  script:
+      - echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
+
+      - docker build -t moviecupidon/frontend:latest .
+      - docker tag moviecupidon/frontend:latest bayar4b/movie-cupidon-frontend:latest
+      - docker push bayar4b/movie-cupidon-frontend:latest
 
 

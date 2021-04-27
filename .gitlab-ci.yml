@@ -45,5 +45,6 @@ deploy:
       - docker build -t moviecupidon/frontend:latest .
       - docker tag moviecupidon/frontend:latest bayar4b/movie-cupidon-frontend:latest
       - docker push bayar4b/movie-cupidon-frontend:latest
-
+  only:
+    - master
 

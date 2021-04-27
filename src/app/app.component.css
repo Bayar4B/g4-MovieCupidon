@@ -15,11 +15,6 @@
   background-size: cover;
   padding-bottom: 00px;
   padding-top: 200px;
-  /*background-image: url("https://live.staticflickr.com/5043/5300777227_aa6cf1ab77_c.jpg");*/
-}
-
-.grid {
-  display: flex;
 }
 
 .main {
@@ -29,16 +24,22 @@
   margin-bottom: 100px;
 }
 
+.grid {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+}
 
-h1 {
+h1 > a {
+  display: block;
   font-family: Monoton;
   font-size: 96px;
   font-weight: 500;
   font-style: normal;
   color: white;
   text-align: center;
+  text-decoration: none;
 }
-
 
 /*the end: https://www.vecteezy.com/vector-art/156687-classic-movie-end-screen-vector*/
 /*design 1: https://live.staticflickr.com/27/39818201_93b63ee250_b.jpg*/

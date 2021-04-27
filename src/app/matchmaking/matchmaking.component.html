@@ -3,7 +3,8 @@
   .container {
     display: flex;
     margin: 100px auto;
-    max-width: 1200px;
+    max-width: 1000px;
+    max-height: 800px;
     flex-direction: row;
     align-items: stretch;
     flex-wrap: nowrap;
@@ -38,8 +39,9 @@
   }
 
   .bar {
-    max-width: 500px; !important;
+    max-width: 500px;
     height: 5px;
+    margin-bottom: 42px;
   }
 
   .bar-container {
@@ -51,24 +53,23 @@
   .card {
     flex: 0 0 50%;
     max-width: 400px;
+    max-height: 600px;
     background-color: #a20a0a;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25), 0 4px 4px rgba(0, 0, 0, 0.25);
   }
+
   .card-text {
-    color: #FAFAFA; !important;
+    color: #FAFAFA;
+  !important;
     font-size: medium;
   }
-  .avatar-card {
 
-  }
-
-  .icon{
+  .icon {
     font-size: 2rem;
   }
 
 
-
-  </style>
+</style>
 
 <div class="container">
   <div class="info-container">
@@ -77,7 +78,7 @@
       <mat-card-header class="card-text">
         <img mat-card-avatar class="avatar-card" src="{{genres[0].img}}"/>
         <mat-card-title>{{films[this.index].name}}</mat-card-title>
-        <mat-card-subtitle  class="card-text">{{films[this.index].genre}}</mat-card-subtitle>
+        <mat-card-subtitle class="card-text">{{films[this.index].genre}}</mat-card-subtitle>
       </mat-card-header>
 
       <img mat-card-image src="{{films[this.index].img}}">

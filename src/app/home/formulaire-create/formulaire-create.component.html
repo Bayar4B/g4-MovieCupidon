@@ -3,17 +3,37 @@
   .input{
     flex-direction: column;
     color: #FAFAFA;
+    margin: 30px;
   }
 
   mat-form-field.mat-form-field {
     font-size: 20px;
   }
 
+  .button {
+    color: #FAFAFA;
+    font-size: x-large;
+    text-align: center;
+    line-height: 124px;
+    width: 265px;
+    height: 124px;
+    background: #DC4545;
+    opacity: 0.9;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25), 0 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 31px;
+    transform: rotate(0.27deg);
+  }
+
 </style>
 
-  <mat-form-field class="input">
-    <mat-label>Username</mat-label>
-    <label>
-      <input matInput placeholder="Ex: NOA18">
-    </label>
-  </mat-form-field>
+<div>
+  <form [formControl]="userForm" (ngSubmit)="onSubmitForm()">
+    <mat-form-field class="input">
+      <mat-label>Username</mat-label>
+        <input matInput placeholder="Ex: NOA18" type="text" class="form-control" id="username">
+    </mat-form-field>
+    <a class="button smaller-button" mat-stroked-button routerLink="lobby"
+       type="submit" [disabled]="userForm.invalid">Start</a>
+  </form>
+</div>
+

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({ templateUrl: 'lobby.component.html'})
 export class LobbyComponent {
+  public token = 'U1B6X';
   public index = 0;
 
   public genres = [
@@ -36,4 +37,10 @@ export class LobbyComponent {
     {name: 'Superhero',
       img: 'https://m.media-amazon.com/images/G/01/IMDb/genres/Superhero._CB1513316168_SX233_CR0,0,233,131_AL_.jpg'}
   ];
+
+  constructor() { }
+
+  /*removeUser(): void {
+    this.homeServices.removePlayer();
+  }*/
 }

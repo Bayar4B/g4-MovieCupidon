@@ -1,6 +1,8 @@
 * {
   box-sizing: border-box;
 }
+
+
 .bg {
   display: flex;
   flex-direction: column;
@@ -33,12 +35,23 @@
 h1 > a {
   display: block;
   font-family: Monoton;
-  font-size: 96px;
+  font-size: 90px;
   font-weight: 500;
   font-style: normal;
   color: white;
   text-align: center;
   text-decoration: none;
+}
+
+@media all and (max-width: 700px) {
+
+  .bg {
+    width: auto;
+  }
+
+  h1 > a {
+    font-size: 45px;
+  }
 }
 
 /*the end: https://www.vecteezy.com/vector-art/156687-classic-movie-end-screen-vector*/

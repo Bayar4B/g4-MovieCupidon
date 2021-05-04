@@ -1,7 +1,8 @@
 <style>
+
   .container {
     display: flex;
-    padding: 100px 0;
+    padding: 50px 0;
     flex-direction: row;
     align-items: stretch;
     flex-wrap: nowrap;
@@ -12,6 +13,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 20px;
   }
 
   .button {
@@ -21,6 +23,7 @@
     line-height: 124px;
     width: 265px;
     height: 124px;
+    margin: 30px;
     background: #DC4545;
     opacity: 0.9;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25), 0 4px 4px rgba(0, 0, 0, 0.25);
@@ -34,15 +37,10 @@
     grid-gap: 10px;
   }
 
- .text-color {
-   height: auto !important;
-   color: #FAFAFA; !important;
- }
-
- .space-list {
-   padding-top: 15px;
-   padding-bottom: 15px;
- }
+  .text-color {
+    height: auto !important;
+    color: #FAFAFA;!important;
+  }
 
   .card-style {
     display: flex;
@@ -59,9 +57,14 @@
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25), 0 4px 4px rgba(0, 0, 0, 0.25);
   }
 
-  .button-container {
+  .row-container {
     display: flex;
     flex-direction: row;
+    padding-top: 30px;
+  }
+
+  .token {
+    font-size: 30px;
   }
 
   .tooltip-color {
@@ -75,7 +78,7 @@
     text-align: center;
   }
 
-  .avatar{
+  .avatar {
     position: relative;
     width: 80px;
     height: 80px;
@@ -83,45 +86,71 @@
     border-radius: 50%;
   }
 
+  @media screen and (max-width: 700px) {
+
+    .container {
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    .button {
+      line-height: 83px;
+      text-align: center;
+    }
+
+    .card-style {
+      width: 30vh;
+      min-height: 40vh;
+      margin: 20px;
+    }
+
+    .avatar {
+      height: 40px;
+      width: 40px;
+    }
+
+    .list-wrapper {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 10px;
+    }
+
+  }
+
 </style>
 
 <div class="items-container">
-  <div class="container">
-    <div class="card-style">
-      <mat-card-title class="text-color space-list">Players</mat-card-title>
-      <mat-list>
-        <mat-list-item class="text-color">User1</mat-list-item>
-        <mat-divider class="space-list"></mat-divider>
-        <mat-list-item class="text-color">User2</mat-list-item>
-        <mat-divider class="space-list"></mat-divider>
-        <mat-list-item class="text-color">User3</mat-list-item>
-        <mat-divider class="space-list"></mat-divider>
-        <mat-list-item class="text-color">User4</mat-list-item>
-        <mat-divider class="space-list"></mat-divider>
-        <mat-list-item class="text-color">User5</mat-list-item>
-        <mat-divider class="space-list"></mat-divider>
-      </mat-list>
-    </div>
 
-
-      <mat-card class="card-style">
-        <mat-card-title class="text-color">Types of movies</mat-card-title>
-        <mat-selection-list>
-          <div class="list-wrapper">
-            <mat-list-option class="text-color" *ngFor="let film of genres; let i = index" >
-              <img class="avatar" src="{{genres[i].img}}"/>
-              <!--{{genres[i].name}}-->
-            </mat-list-option>
-          </div>
-        </mat-selection-list>
-      </mat-card>
-
-  </div>
-  <div class="button-container">
-    <a class="button smaller-button" mat-stroked-button routerLink="matchmaking">Start</a>
+  <div class="row-container">
+    <p class="token">Token: {{token}}</p>
     <button mat-icon-button matTooltip="Copy link" matTooltipClass="tooltip-color">
       <mat-icon>filter_none</mat-icon>
     </button>
+  </div>
+
+
+  <div class="container">
+    <div class="card-style">
+      <app-user-list></app-user-list>
+    </div>
+
+
+    <mat-card class="card-style">
+      <mat-card-title class="text-color">Types of movies</mat-card-title>
+      <mat-selection-list>
+        <div class="list-wrapper">
+          <mat-list-option class="text-color" *ngFor="let film of genres; let i = index">
+            <img class="avatar" src="{{genres[i].img}}"/>
+            <!--{{genres[i].name}}-->
+          </mat-list-option>
+        </div>
+      </mat-selection-list>
+    </mat-card>
+  </div>
+
+  <div class="row-container">
+    <a class="button smaller-button" mat-stroked-button routerLink="matchmaking">Start</a>
+    <a class="button smaller-button" mat-stroked-button routerLink="home">Quit</a>
   </div>
 
 

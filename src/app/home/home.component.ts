@@ -1,8 +1,17 @@
 import { Component, Input} from '@angular/core';
+import {HomeServices} from '../services/home.services';
 
-@Component({ templateUrl: 'home.component.html' })
+@Component({
+  selector: 'app-home',
+  providers: [HomeServices],
+  templateUrl: 'home.component.html' })
 
 export class HomeComponent {
   public state = 'buttons';
+  constructor() { }
+
+  /*addUser(): void {
+    this.homeServices.addPlayer();
+  }*/
 }
 

@@ -3,7 +3,8 @@ import { Component } from '@angular/core';
 @Component({ templateUrl: 'matchmaking.component.html' })
 export class MatchmakingComponent {
   public index = 0;
-  //public button = this.index++;
+
+  constructor() { }
 
     public genres = [
       {id: 0, name: 'comedy',
@@ -49,6 +50,13 @@ export class MatchmakingComponent {
         img: 'https://m.media-amazon.com/images/M/MV5BY2ZlNWIxODMtN2YwZi00ZjNmLWIyN2UtZTFkYmZkNDQyNTAyXkEyXkFqcGdeQXVyODkzNTgxMDg@._V1_UX182_CR0,0,182,268_AL_.jpg',
       }
     ];
+     formatLabel(value: number): any {
+    if (value >= 1000) {
+      return Math.round(value / 1000);
+    }
+
+    return value;
+  }
 }
 
 

@@ -13,8 +13,7 @@ build:
   # only:
   #   - master    
   script:
-    - npm install -g @angular/cli
-    - npm install
+    - npm ci
     - ng build 
   artifacts:
     paths:

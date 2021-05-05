@@ -14,6 +14,7 @@ build:
   #   - master    
   script:
     - npm ci
+    - npm install -g @angular/cli
     - ng build 
   artifacts:
     paths:

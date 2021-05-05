@@ -41,10 +41,8 @@ deploy:
   stage: deploy
   script:
       - echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
-
       - docker build -t moviecupidon/frontend:latest .
-      - docker tag moviecupidon/frontend:latest bayar4b/movie-cupidon-frontend:latest
-      - docker push bayar4b/movie-cupidon-frontend:latest
+      - docker push moviecupidon/frontend .
   only:
     - master
 

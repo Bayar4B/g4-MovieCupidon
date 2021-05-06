@@ -14,7 +14,7 @@ import { FormulaireJoinComponent } from './home/formulaire-join/formulaire-join.
 // Material ui components
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-import {MatGridList, MatGridListModule} from '@angular/material/grid-list';
+import { MatGridListModule} from '@angular/material/grid-list';
 import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
@@ -29,8 +29,9 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { UserListComponent } from './user-list/user-list.component';
-import {UserService} from './services/user.service';
-import {HomeServices} from './services/home.services';
+import { UserService } from './services/user.service';
+import { HomeServices } from './services/home.services';
+import { TokenService } from './services/token.service';
 
 
 
@@ -66,7 +67,8 @@ import {HomeServices} from './services/home.services';
     ],
   providers: [
     UserService,
-    HomeServices
+    HomeServices,
+    TokenService
   ],
   bootstrap: [AppComponent]
 })

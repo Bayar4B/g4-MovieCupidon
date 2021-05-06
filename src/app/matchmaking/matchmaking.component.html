@@ -41,9 +41,14 @@
   }
 
   .card-text {
-    color: #FAFAFA;
-  !important;
+    color: #FAFAFA; !important;
     font-size: medium;
+  }
+
+  .mat-slide {
+    padding-top: 25px;
+    width: 500px;
+
   }
 
   @media screen and (max-width: 700px) {
@@ -64,6 +69,10 @@
       width: 400px;
     }
 
+    .mat-slide {
+      width: auto;
+    }
+
   }
 
 
@@ -73,22 +82,19 @@
   <div class="container">
 
 
-  <mat-progress-bar class="bar" mode="determinate" value="40"></mat-progress-bar>
+    <mat-progress-bar class="bar" mode="determinate" value="40"></mat-progress-bar>
 
-  <div class="info-container">
+    <div class="info-container">
 
-    <mat-card class="card">
-      <mat-card-header class="card-text">
-        <img mat-card-avatar class="avatar-card" src="{{genres[0].img}}"/>
-        <mat-card-title>{{films[this.index].name}}</mat-card-title>
-        <mat-card-subtitle class="card-text">{{films[this.index].genre}}</mat-card-subtitle>
-      </mat-card-header>
+      <mat-card class="card">
+        <mat-card-header class="card-text">
+          <img mat-card-avatar class="avatar-card" src="{{genres[0].img}}"/>
+          <mat-card-title>{{films[this.index].name}}</mat-card-title>
+          <mat-card-subtitle class="card-text">{{films[this.index].genre}}</mat-card-subtitle>
+        </mat-card-header>
 
-      <img mat-card-image src="{{films[this.index].img}}">
-    </mat-card>
-
-
-
+        <img mat-card-image src="{{films[this.index].img}}">
+      </mat-card>
 
       <mat-card class="card">
 
@@ -107,16 +113,17 @@
         </mat-card-content>
       </mat-card>
 
-  </div>
+    </div>
 
-  <mat-slider color="warn"
-    thumbLabel
-    [displayWith]="formatLabel"
-    tickInterval="1000"
-    step="1000"
-    min="0"
-    max="100000"
-    aria-label="units">
-  </mat-slider>
+    <mat-slider class="mat-slide"
+                color="warn"
+                thumbLabel
+                [displayWith]="formatLabel"
+                tickInterval="1000"
+                step="1000"
+                min="0"
+                max="100000"
+                aria-label="units">
+    </mat-slider>
   </div>
 </div>

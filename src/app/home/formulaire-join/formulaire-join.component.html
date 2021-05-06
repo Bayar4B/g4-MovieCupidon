@@ -1,20 +1,16 @@
 <style>
 
+  .full-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
   .input {
     color: #FAFAFA;
     margin: 30px;
   }
-  .full-container {
-    display: flex;
-    flex-direction: row;
-  }
 
-  .form-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-  }
 
   .button {
     color: #FAFAFA;
@@ -23,6 +19,7 @@
     line-height: 124px;
     width: 265px;
     height: 124px;
+    margin-right: 80px;
     background: #DC4545;
     opacity: 0.9;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25), 0 4px 4px rgba(0, 0, 0, 0.25);
@@ -34,26 +31,51 @@
     font-size: 20px;
   }
 
+  @media screen and (max-width: 700px) {
+
+    .input {
+      justify-content: center;
+      align-items: stretch;
+      margin: 5px;
+    }
+
+    .full-container {
+      flex-direction: column;
+      padding-left: 80px;
+    }
+
+    .button {
+      width: 177px;
+      height: 83px;
+      line-height: 83px;
+      text-align: center;
+      margin: 20px;
+    }
+  }
+
 </style>
 
 <div class="full-container">
 
-  <div class="form-container">
-    <mat-form-field class="input">
-      <mat-label>Username</mat-label>
-      <label>
-        <input matInput placeholder="Ex: NOA18">
-      </label>
-    </mat-form-field>
+    <form [formGroup]="userTokenForm" (ngSubmit)="onSubmitForm()">
 
-    <mat-form-field class="input">
-      <mat-label>Token</mat-label>
-      <label>
-        <input matInput placeholder="Ex: U1B6X">
-      </label>
-    </mat-form-field>
-  </div>
+      <mat-form-field class="input">
+        <mat-label>Username</mat-label>
+        <label>
+          <input type="text" class="form-control" formControlName="username" matInput placeholder="Ex: NOA18">
+        </label>
+      </mat-form-field>
 
-  <a class="button smaller-button" mat-stroked-button routerLink="lobby">Start</a>
+      <mat-form-field class="input">
+        <mat-label>Token</mat-label>
+        <label>
+          <input type="text" class="form-control" formControlName="token" matInput placeholder="Ex: U1B6X">
+        </label>
+      </mat-form-field>
+
+      <button class="button smaller-button" mat-stroked-button
+              type="submit" [disabled]="userTokenForm.invalid">Start</button>
+
+    </form>
 
 </div>

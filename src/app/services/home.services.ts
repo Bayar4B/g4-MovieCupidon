@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -9,7 +9,7 @@ const httpOptions = {
 
 @Injectable()
 export class HomeServices {
-  createUrl = 'http://localhost:8000/loby/username';
+  /*createUrl = 'http://localhost:8000/loby/username';
   joinUrl = 'http://localhost:8000/loby/username+token';
 
   constructor(private http: HttpClient) {}
@@ -30,7 +30,7 @@ export class HomeServices {
           console.log('Error : ' + error);
         }
       );
-  }
+  }*/
 
 
 }

@@ -67,10 +67,6 @@
     font-size: 30px;
   }
 
-  .tooltip-color {
-    background-color: #a20a0a;
-  }
-
   .smaller-button {
     width: 177px;
     height: 83px;
@@ -115,6 +111,11 @@
       grid-gap: 10px;
     }
 
+    .row-container {
+      flex-direction: column;
+      align-items: center
+    }
+
   }
 
 </style>
@@ -123,17 +124,15 @@
 
   <div class="row-container">
     <p class="token">Token: {{token}}</p>
-    <button mat-icon-button matTooltip="Copy link" matTooltipClass="tooltip-color">
+    <button mat-icon-button matTooltip="Copy link">
       <mat-icon>filter_none</mat-icon>
     </button>
   </div>
-
 
   <div class="container">
     <div class="card-style">
       <app-user-list></app-user-list>
     </div>
-
 
     <mat-card class="card-style">
       <mat-card-title class="text-color">Types of movies</mat-card-title>
@@ -152,7 +151,6 @@
     <a class="button smaller-button" mat-stroked-button routerLink="matchmaking">Start</a>
     <a class="button smaller-button" mat-stroked-button routerLink="home">Quit</a>
   </div>
-
 
 </div>
 

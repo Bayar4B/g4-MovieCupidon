@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { UserService} from '../../services/user.service';
 import { HomeServices } from '../../services/home.services';
 import { User} from '../../models/User.model';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -11,18 +12,19 @@ import { User} from '../../models/User.model';
 })
 export class FormulaireCreateComponent implements OnInit {
 
-  userForm: FormControl;
+  userForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
               private userService: UserService,
-              private homeServices: HomeServices) {}
+              private homeServices: HomeServices,
+              private router: Router){}
 
   ngOnInit(): void {
     this.initForm();
   }
 
   initForm(): any {
-    this.userForm = this.formBuilder.control({
+    this.userForm = this.formBuilder.group({
       username: ['', Validators.required]
     });
   }
@@ -33,6 +35,8 @@ export class FormulaireCreateComponent implements OnInit {
       formValue.username
     );
     this.userService.addUser(newUser);
-    this.homeServices.createGame(newUser.username);
+    // this.homeServices.createGame(newUser.username);
+
+    this.router.navigate(['lobby']);
   }
 }

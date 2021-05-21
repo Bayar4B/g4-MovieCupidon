@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Router} from '@angular/router';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -9,16 +10,19 @@ const httpOptions = {
 
 @Injectable()
 export class HomeServices {
-  /*createUrl = 'http://localhost:8000/loby/username';
-  joinUrl = 'http://localhost:8000/loby/username+token';
+  createUrl = 'https://movie.graved.ch/api/lobby/v1/create-lobby/new-lobby';
+  joinUrl = 'http://movie.graved.ch/loby/username+token';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   createGame(username: string): void {
-    this.http.post(this.createUrl, {username}, httpOptions)
+    this.http.post(this.createUrl, {username})
       .subscribe(
-        (error) => {
-          console.log('Error : ' + error);
+        (result) => {
+          console.log(result);
+          /*console.log('ownerID', ownerID);
+          console.log('token', token);
+          this.router.navigate(['lobby']);*/
         }
       );
   }
@@ -26,11 +30,11 @@ export class HomeServices {
   joinGame(username: string, token: string): void {
     this.http.post(this.joinUrl, {username, token}, httpOptions)
       .subscribe(
-        (error) => {
-          console.log('Error : ' + error);
+        ( ) => {
+          this.router.navigate(['lobby']);
         }
       );
-  }*/
+  }
 
 
 }

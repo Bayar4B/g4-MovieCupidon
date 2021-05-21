@@ -39,7 +39,8 @@
 
   .text-color {
     height: auto !important;
-    color: #FAFAFA;!important;
+    color: #FAFAFA;
+  !important;
   }
 
   .card-style {
@@ -107,7 +108,7 @@
 
     .list-wrapper {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       grid-gap: 10px;
     }
 
@@ -136,19 +137,25 @@
 
     <mat-card class="card-style">
       <mat-card-title class="text-color">Types of movies</mat-card-title>
-      <mat-selection-list>
-        <div class="list-wrapper">
-          <mat-list-option class="text-color" *ngFor="let film of genres; let i = index">
-            <img class="avatar" src="{{genres[i].img}}"/>
-            <!--{{genres[i].name}}-->
-          </mat-list-option>
-        </div>
+
+      <mat-selection-list #genre [(ngModel)]="selectedGenre" (ngModelChange)="sample($event)">
+          <div class="list-wrapper">
+            <mat-list-option class="text-color" *ngFor="let film of genres" >
+              {{film.name}}
+            </mat-list-option>
+          </div>
       </mat-selection-list>
+
+      <p>
+        Options selected: {{selectedGenre}}
+      </p>
+
+
     </mat-card>
   </div>
 
   <div class="row-container">
-    <a class="button smaller-button" mat-stroked-button routerLink="matchmaking">Start</a>
+    <a class="button smaller-button" mat-stroked-button routerLink="matchmaking" >Start</a>
     <a class="button smaller-button" mat-stroked-button routerLink="home">Quit</a>
   </div>
 

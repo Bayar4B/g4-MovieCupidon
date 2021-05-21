@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { UserService} from '../../services/user.service';
-import { HomeServices } from '../../services/home.services';
-import { User} from '../../models/User.model';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UserService} from '../../services/user.service';
+import {HomeServices} from '../../services/home.services';
+import {User} from '../../models/User.model';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -16,8 +16,8 @@ export class FormulaireCreateComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private userService: UserService,
-              private homeServices: HomeServices,
-              private router: Router){}
+              private homeServices: HomeServices) {
+  }
 
   ngOnInit(): void {
     this.initForm();
@@ -25,18 +25,18 @@ export class FormulaireCreateComponent implements OnInit {
 
   initForm(): any {
     this.userForm = this.formBuilder.group({
-      username: ['', Validators.required]
+      username: ['', Validators.required],
+      owner: true
     });
   }
 
   onSubmitForm(): void {
     const formValue = this.userForm.value;
     const newUser = new User(
-      formValue.username
+      formValue.username,
+      formValue.owner
     );
-    this.userService.addUser(newUser);
-    // this.homeServices.createGame(newUser.username);
 
-    this.router.navigate(['lobby']);
+    this.homeServices.createGame(newUser.username);
   }
 }

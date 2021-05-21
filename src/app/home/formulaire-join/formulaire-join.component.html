@@ -1,5 +1,10 @@
 <style>
 
+  .column-container {
+    display: flex;
+    flex-direction: column;
+  }
+
   .full-container {
     display: flex;
     flex-direction: row;
@@ -54,8 +59,9 @@
   }
 
 </style>
+<div class="column-container">
 
-<div class="full-container">
+  <div class="full-container">
 
     <form [formGroup]="userTokenForm" (ngSubmit)="onSubmitForm()">
 
@@ -73,9 +79,13 @@
         </label>
       </mat-form-field>
 
-      <button class="button smaller-button" mat-stroked-button
-              type="submit" [disabled]="userTokenForm.invalid">Start</button>
+
 
     </form>
 
+    <button class="button smaller-button" mat-stroked-button
+            type="submit" [disabled]="userTokenForm.invalid">Start</button>
+
+  </div>
 </div>
+

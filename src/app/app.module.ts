@@ -32,7 +32,8 @@ import { UserListComponent } from './user-list/user-list.component';
 import { UserService } from './services/user.service';
 import { HomeServices } from './services/home.services';
 import { TokenService } from './services/token.service';
-
+/* import { ChatComponent } from './chat/chat.component';
+import {SocketService} from './services/socket.service'; */
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { TokenService } from './services/token.service';
     MatchmakingComponent,
     FormulaireCreateComponent,
     FormulaireJoinComponent,
-    UserListComponent
+    UserListComponent,
+    /*ChatComponent*/
   ],
     imports: [
         BrowserModule,
@@ -68,7 +70,8 @@ import { TokenService } from './services/token.service';
   providers: [
     UserService,
     HomeServices,
-    TokenService
+    TokenService,
+    // SocketService
   ],
   bootstrap: [AppComponent]
 })

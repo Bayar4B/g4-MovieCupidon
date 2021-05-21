@@ -1,46 +1,41 @@
 import { Component } from '@angular/core';
+import { Genre } from '../models/Genre.model';
 
-@Component({ templateUrl: 'lobby.component.html'})
+@Component({templateUrl: 'lobby.component.html'})
+
 export class LobbyComponent {
   public token = 'U1B6X';
   public index = 0;
+  selectedGenre: Genre[];
 
-  public genres = [
-    {name: 'Comedy',
-      img: 'https://m.media-amazon.com/images/G/01/IMDb/genres/Comedy._CB1513316167_SX233_CR0,0,233,131_AL_.jpg'},
-    {name: 'Sci-fi',
-      img: 'https://m.media-amazon.com/images/G/01/IMDb/genres/Sci-Fi._CB1513316168_SX233_CR0,0,233,131_AL_.jpg'},
-    {name: 'Horror',
-      img: 'https://m.media-amazon.com/images/G/01/IMDb/genres/Horror._CB1513316168_SX233_CR0,0,233,131_AL_.jpg'},
-    {name: 'Romance',
-      img: 'https://m.media-amazon.com/images/G/01/IMDb/genres/Romance._CB1513316168_SX233_CR0,0,233,131_AL_.jpg'},
-    {name: 'Action',
-      img: 'https://m.media-amazon.com/images/G/01/IMDb/genres/Action._CB1513316166_SX233_CR0,0,233,131_AL_.jpg'},
-    {name: 'Thriller',
-      img: 'https://m.media-amazon.com/images/G/01/IMDb/genres/Thriller._CB1513316169_SX233_CR0,0,233,131_AL_.jpg'},
-    {name: 'Drama',
-      img: 'https://m.media-amazon.com/images/G/01/IMDb/genres/Drama._CB1513316168_SX233_CR0,0,233,131_AL_.jpg' },
-    {name: 'Mystery',
-      img: 'https://m.media-amazon.com/images/G/01/IMDb/genres/Mystery._CB1513316168_SX233_CR0,0,233,131_AL_.jpg'},
-    {name: 'Crime',
-      img: 'https://m.media-amazon.com/images/G/01/IMDb/genres/Crime._CB1513316167_SX233_CR0,0,233,131_AL_.jpg'},
-    {name: 'Animation',
-      img: 'https://m.media-amazon.com/images/G/01/IMDb/genres/Animation._CB1513316167_SX233_CR0,0,233,131_AL_.jpg'},
-    {name: 'Adventure',
-      img: 'https://m.media-amazon.com/images/G/01/IMDb/genres/Adventure._CB1513316166_SX233_CR0,0,233,131_AL_.jpg'},
-    {name: 'Fantasy',
-      img: 'https://m.media-amazon.com/images/G/01/IMDb/genres/Fantasy._CB1513316168_SX233_CR0,0,233,131_AL_.jpg'},
-    {name: 'Comedy-romance',
-      img: 'https://m.media-amazon.com/images/G/01/IMDb/genres/Comedy-Romance._CB1513316167_SX233_CR0,0,233,131_AL_.jpg'},
-    {name: 'Action-comedy',
-      img: 'https://m.media-amazon.com/images/G/01/IMDb/genres/Action-Comedy._CB1513316166_SX233_CR0,0,233,131_AL_.jpg'},
-    {name: 'Superhero',
-      img: 'https://m.media-amazon.com/images/G/01/IMDb/genres/Superhero._CB1513316168_SX233_CR0,0,233,131_AL_.jpg'}
-  ];
+  action = new Genre(28, 'Action');
+  adventure = new Genre(12, 'Adventure');
+  anim = new Genre(16, 'Animation');
+  comedy = new Genre(35, 'Comedy');
+  crime = new Genre(80, 'Crime');
+  doc = new Genre(99, 'Documentary');
+  drama = new Genre(18, 'Drama');
+  family = new Genre(10751, 'Family');
+  fantasy = new Genre(14, 'Fantasy');
+  history = new Genre(36, 'History');
+  horror = new Genre(27, 'Horror');
+  music = new Genre(10402, 'Music');
+  mystery = new Genre(9648, 'Mystery');
+  romance = new Genre(10749, 'Romance');
+  scifi = new Genre(878, 'Science-Fiction');
+  tvmovie = new Genre(10770, 'TV Movie');
+  thriller = new Genre(53, 'Thriller');
+  war = new Genre(10752, 'War');
+  western = new Genre(37, 'Western');
 
-  constructor() { }
+  genres = [this.action, this.adventure, this.anim, this.comedy, this.crime,
+    this.doc, this.drama, this.family, this.fantasy, this.history, this.horror,
+    this.music, this.mystery, this.romance, this.scifi, this.tvmovie, this.thriller,
+    this.war, this.western];
 
-  /*removeUser(): void {
-    this.homeServices.removePlayer();
-  }*/
+  constructor() {}
+
+  sample(event): void{
+    console.log(this.selectedGenre);
+  }
 }

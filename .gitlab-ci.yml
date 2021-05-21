@@ -1,6 +1,5 @@
 stages:
  - build
- - test
  - deploy
 
 cache:
@@ -11,21 +10,16 @@ build:
   stage: build
   image: node
   # only:
-  #   - master    
+  #   - master
   script:
     - npm ci
     - npm install -g @angular/cli
-    - ng build 
+    - ng build
   artifacts:
     paths:
       - dist/
 
-test:
-  image: trion/ng-cli-karma
-  stage: test
-  before_script:
-    - yarn global add @angular/cli
-    - yarn install
+
   script:
     - yarn add @angular-devkit/build-angular --dev
     - ng test --no-watch --code-coverage

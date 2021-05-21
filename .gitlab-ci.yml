@@ -22,7 +22,6 @@ build:
 
   script:
     - yarn add @angular-devkit/build-angular --dev
-    - ng test --no-watch --code-coverage
     - ng e2e
   artifacts:
     paths:

@@ -9,8 +9,7 @@ cache:
 build:
   stage: build
   image: node
-  # only:
-  #   - master
+
   script:
     - npm ci
     - npm install -g @angular/cli
@@ -18,14 +17,6 @@ build:
   artifacts:
     paths:
       - dist/
-
-
-  script:
-    - yarn add @angular-devkit/build-angular --dev
-    - ng e2e
-  artifacts:
-    paths:
-      - coverage/
 
 deploy:
   dependencies:
@@ -37,5 +28,5 @@ deploy:
       - docker build -t moviecupidon/frontend:latest .
       - docker push moviecupidon/frontend .
   only:
-    - master
+    - Dev
 

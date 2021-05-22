@@ -1,6 +1,5 @@
 stages:
  - build
- - test
  - deploy
 
 cache:
@@ -10,29 +9,14 @@ cache:
 build:
   stage: build
   image: node
-  # only:
-  #   - master    
+
   script:
+    - npm ci
     - npm install -g @angular/cli
-    - npm install
-    - ng build 
+    - ng build
   artifacts:
     paths:
       - dist/
-
-test:
-  image: trion/ng-cli-karma
-  stage: test
-  before_script:
-    - yarn global add @angular/cli
-    - yarn install
-  script:
-    - yarn add @angular-devkit/build-angular --dev
-    - ng test --no-watch --code-coverage
-    - ng e2e
-  artifacts:
-    paths:
-      - coverage/
 
 deploy:
   dependencies:
@@ -41,9 +25,8 @@ deploy:
   stage: deploy
   script:
       - echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
-
       - docker build -t moviecupidon/frontend:latest .
-      - docker tag moviecupidon/frontend:latest bayar4b/movie-cupidon-frontend:latest
-      - docker push bayar4b/movie-cupidon-frontend:latest
-
+      - docker push moviecupidon/frontend .
+  only:
+    - Dev
 

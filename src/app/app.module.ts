@@ -32,6 +32,8 @@ import { UserListComponent } from './user-list/user-list.component';
 import { UserService } from './services/user.service';
 import { HomeServices } from './services/home.services';
 import { TokenService } from './services/token.service';
+import { AuthentificationComponent } from './authentification/authentification.component';
+import {MatSelectModule} from '@angular/material/select';
 /* import { ChatComponent } from './chat/chat.component';
 import {SocketService} from './services/socket.service'; */
 
@@ -45,6 +47,7 @@ import {SocketService} from './services/socket.service'; */
     FormulaireCreateComponent,
     FormulaireJoinComponent,
     UserListComponent,
+    AuthentificationComponent,
     /*ChatComponent*/
   ],
     imports: [
@@ -65,7 +68,8 @@ import {SocketService} from './services/socket.service'; */
         MatTooltipModule,
         MatExpansionModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        MatSelectModule
     ],
   providers: [
     UserService,

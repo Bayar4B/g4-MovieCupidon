@@ -3,10 +3,10 @@ import {Subject} from 'rxjs';
 
 export class TokenService {
   private token: Token;
-  tokenSubject = new Subject<Token>();
+  userSubject = new Subject<Token>();
 
   emitToken(): void {
-    this.tokenSubject.next(this.token);
+    this.userSubject.next(this.token);
   }
 
 }

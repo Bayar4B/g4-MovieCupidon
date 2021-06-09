@@ -29,6 +29,7 @@ export class FormulaireJoinComponent implements OnInit {
   initForm(): any {
     this.userTokenForm = this.formBuilder.group({
       username: ['', Validators.required],
+      owner: false,
       token: ['', Validators.required]
     });
   }
@@ -36,7 +37,8 @@ export class FormulaireJoinComponent implements OnInit {
   onSubmitForm(): void {
     const formValue = this.userTokenForm.value;
     const newUser = new User(
-      formValue.username
+      formValue.username,
+      formValue.owner
     );
     const newToken = new Token(
       formValue.token
@@ -44,7 +46,7 @@ export class FormulaireJoinComponent implements OnInit {
     this.userService.addUser(newUser);
     this.tokenService.emitToken();
     this.router.navigate(['lobby']);
-    this.homeServices.joinGame(newUser.username, newToken.idToken);
+    // this.homeServices.joinGame(newUser.username, newToken.token);
   }
 
 }

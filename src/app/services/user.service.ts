@@ -1,5 +1,5 @@
 import { User } from '../models/User.model';
-import { Subject } from 'rxjs';
+import {Subject} from 'rxjs';
 
 export class UserService {
   private users: User[] = [];

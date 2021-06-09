@@ -25,11 +25,6 @@
     align-items: center;
   }
 
-  .bar {
-    max-width: 500px;
-    height: 5px;
-  }
-
   .card {
     flex: 0 0 50%;
     margin: 30px;
@@ -48,10 +43,23 @@
   .mat-slide {
     padding-top: 25px;
     width: 500px;
-    height: 5px;
-
+    color: #FAFAFA;
   }
 
+  .button {
+    color: #FAFAFA;
+    font-size: x-large;
+    width: 177px;
+    height: 83px;
+    line-height: 83px;
+    text-align: center;
+    margin: 30px;
+    background: #a20a0a;
+    opacity: 0.9;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25), 0 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 31px;
+    transform: rotate(0.27deg);
+  }
   @media screen and (max-width: 700px) {
 
     .bg {
@@ -82,49 +90,41 @@
 <div class="bg">
   <div class="container">
 
-
-    <mat-progress-bar class="bar" mode="determinate" value="40"></mat-progress-bar>
-
     <div class="info-container">
 
       <mat-card class="card">
         <mat-card-header class="card-text">
-          <img mat-card-avatar class="avatar-card" src="{{genres[0].img}}"/>
-          <mat-card-title>{{films[this.index].name}}</mat-card-title>
-          <mat-card-subtitle class="card-text">{{films[this.index].genre}}</mat-card-subtitle>
+          <mat-card-title>{{movies[this.index].title}}</mat-card-title>
         </mat-card-header>
 
-        <img mat-card-image src="{{films[this.index].img}}">
+        <img mat-card-image src="{{movies[this.index].image}}">
       </mat-card>
 
       <mat-card class="card">
 
         <mat-card-content class="card-text">
           <h2>Storyline</h2>
-          <p>{{films[this.index].storyline}}</p>
+          <p>{{movies[this.index].overview}}</p>
 
-          <h2>Creators</h2>
-          <p>{{films[this.index].creators}}</p>
+          <h2>Release Date</h2>
+          <p>{{movies[this.index].releaseDates}}</p>
 
-          <h2>Stars</h2>
-          <p>{{films[this.index].stars}}</p>
-
-          <h2>Year(s)</h2>
-          <p>{{films[this.index].year}}</p>
+          <h2>Vote Average</h2>
+          <p>{{movies[this.index].voteAverage}}</p>
         </mat-card-content>
       </mat-card>
 
     </div>
 
-    <mat-slider class="mat-slide"
-                color="warn"
-                thumbLabel
-                [displayWith]="formatLabel"
-                tickInterval="1000"
-                step="1000"
-                min="0"
-                max="100000"
-                aria-label="units">
-    </mat-slider>
+    {{this.index}}
+
+    <mat-slider class="mat-slide" color="primary" thumbLabel [displayWith]="formatLabel"
+                tickInterval="100" step="1000" min="0" max="100000" aria-label="units"
+                [value]="score"></mat-slider>
+
+    {{this.score}}
+
+    <div class="button" (click)="sendScore(this.index, this.score)">Next</div>
+
   </div>
 </div>

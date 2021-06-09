@@ -1,5 +1,5 @@
 export class Token {
   constructor(
-    public token: string
+    public idToken: string
   ) {}
 }

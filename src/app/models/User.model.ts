@@ -1,6 +1,5 @@
 export class User {
   constructor(
-    public username: string,
-    public owner: boolean
+    public username: string
   ) {}
 }

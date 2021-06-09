@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {UserService} from '../../services/user.service';
-import {HomeServices} from '../../services/home.services';
-import {User} from '../../models/User.model';
+import  {Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserService } from '../../services/user.service';
+import { HomeServices } from '../../services/home.services';
+import { User } from '../../models/User.model';
 
 
 @Component({
@@ -24,16 +24,16 @@ export class FormulaireCreateComponent implements OnInit {
 
   initForm(): any {
     this.userForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      owner: true
+      username: ['', Validators.required]
+      // owner: true
     });
   }
 
   onSubmitForm(): void {
     const formValue = this.userForm.value;
     const newUser = new User(
-      formValue.username,
-      formValue.owner
+      formValue.username
+      // formValue.owner
     );
 
     this.homeServices.createGame(newUser.username);

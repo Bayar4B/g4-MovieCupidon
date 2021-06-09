@@ -7,17 +7,7 @@
         <a routerLink="**">MovieCupidon</a>
       </h1>
 
-      <div *ngIf="this.login === false">
-        <router-outlet></router-outlet>
-      </div>
-      <div *ngIf="this.login === true">
-        <app-authentification></app-authentification>
-      </div>
-
-
-
-
-
+      <router-outlet></router-outlet>
     </div>
 
   </div>

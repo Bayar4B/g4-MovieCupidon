@@ -35,7 +35,6 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 10px;
-    margin: 20px;
   }
 
   .text-color {
@@ -46,12 +45,13 @@
 
   .card-style {
     display: flex;
+    min-height: 50vh;
     min-width: 10vh;
     margin: 0 40px;
     padding: 40px;
     flex-direction: column;
     flex-wrap: wrap;
-    justify-content: stretch;
+    justify-content: center;
     background-color: #dc4545;
     opacity: 0.8;
     border-radius: 31px;
@@ -75,17 +75,13 @@
     text-align: center;
   }
 
-  .input {
-    color: #FAFAFA;
-    margin-top: 20px;
+  .avatar {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+    border-radius: 50%;
   }
-
-  .year-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-  }
-
 
   @media screen and (max-width: 700px) {
 
@@ -105,22 +101,21 @@
       margin: 20px;
     }
 
+    .avatar {
+      height: 40px;
+      width: 40px;
+    }
+
     .list-wrapper {
       display: grid;
-      grid-template-columns: repeat(1, 0.5fr);
-      padding-left: 25px;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 10px;
     }
 
     .row-container {
       flex-direction: column;
       align-items: center
     }
-
-    .year-container {
-      flex-direction: column;
-      align-items: center;
-    }
-
 
   }
 
@@ -129,7 +124,7 @@
 <div class="items-container">
 
   <div class="row-container">
-    <p class="token">Token: {{this.token}}</p>
+    <p class="token">Token: {{token}}</p>
     <button mat-icon-button matTooltip="Copy link">
       <mat-icon>filter_none</mat-icon>
     </button>
@@ -143,43 +138,25 @@
     <mat-card class="card-style">
       <mat-card-title class="text-color">Types of movies</mat-card-title>
 
-      <mat-selection-list [(ngModel)]="selectedGenre">
-        <div class="list-wrapper">
-          <mat-list-option class="text-color" *ngFor="let film of genres">
-            {{film.name}}
-          </mat-list-option>
-        </div>
+      <mat-selection-list #genre [(ngModel)]="selectedGenre" (ngModelChange)="sample($event)">
+          <div class="list-wrapper">
+            <mat-list-option class="text-color" *ngFor="let film of genres" >
+              {{film.name}}
+            </mat-list-option>
+          </div>
       </mat-selection-list>
 
-      <mat-card-title class="text-color">Years</mat-card-title>
-      <div class="year-container">
-        <mat-form-field class="input" [(ngModel)]="yearDown" ngDefaultControl>
-          <mat-label>YearDown</mat-label>
-          <input matInput maxlength="4" placeholder="1900" value="1900">
-        </mat-form-field>
-
-        <mat-form-field class="input" [(ngModel)]="yearUp" ngDefaultControl>
-          <mat-label>YearUp</mat-label>
-          <input matInput maxlength="4" placeholder="2021" value="2021">
-        </mat-form-field>
-      </div>
+      <p>
+        Options selected: {{selectedGenre}}
+      </p>
 
 
     </mat-card>
   </div>
 
   <div class="row-container">
-    <div *ngIf="this.owner === false">
-      <a class="button smaller-button" mat-stroked-button routerLink="matchmaking"
-         (click)="sendReady()">Ready</a>
-    </div>
-    <div *ngIf="this.owner === true">
-      <a class="button smaller-button" mat-stroked-button routerLink="matchmaking"
-         (click)="sendSampleSelectionOwner(selectedGenre, [yearDown, yearUp])">Start</a>
-    </div>
-
-    <a class="button smaller-button" mat-stroked-button routerLink="home"
-       (click)="sendQuit()">Quit</a>
+    <a class="button smaller-button" mat-stroked-button routerLink="matchmaking" >Start</a>
+    <a class="button smaller-button" mat-stroked-button routerLink="home">Quit</a>
   </div>
 
 </div>

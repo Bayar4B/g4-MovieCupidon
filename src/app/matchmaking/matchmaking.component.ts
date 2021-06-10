@@ -41,7 +41,7 @@ export class MatchmakingComponent implements OnInit, OnDestroy {
     );
     this.movieService.emitMovies();
     this.interval = setInterval(async () => {
-      if (await this.checkAllFinished ) {
+      if ( await this.checkAllFinished ) {
         this.resultIndex = this.getResult();
         this.state = 'finish';
       }

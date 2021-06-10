@@ -75,13 +75,14 @@ export class LobbyComponent implements OnInit, OnDestroy {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'X-User': '890x'
+        'X-User': '10x'
       },
-      body: JSON.stringify( {genreList: selectedGenre.map(g => g.toLowerCase()), rangeYear: years.map(y => parseInt(y))} )
+      body: JSON.stringify( {genreList: selectedGenre.map(g => g.toLowerCase()), rangeYear: years.map(y => parseInt(y, 10))} )
     })
-      .then(req => req.json())
+      .then(req => req.text())
       .then(res => {
         this.initDB = res;
+        this.initPlayService(this.initDB);
       })
       .catch(err => {
         console.log('err', err);
@@ -92,7 +93,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
     const req = await fetch('https://movie.graved.ch/api/lobby/v1/lobby/isEveryoneReady', {
       method: 'GET',
       headers: {
-        'X-User': '890x'
+        'X-User': '10x'
       }
     });
     const res = await req.json();
@@ -125,7 +126,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
         'Content-Type': 'application/json',
         'X-User': '38y'
       },
-      body: JSON.stringify( {genreList: selectedGenre.map(g => g.toLowerCase()), rangeYear: years.map(y => parseInt(y))} )
+      body: JSON.stringify( {genreList: selectedGenre.map(g => g.toLowerCase()), rangeYear: years.map(y => parseInt(y, 10))} )
     })
       .then(req => req.json())
       .then( res => {
@@ -147,7 +148,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'X-User': '890x'
+          'X-User': '10x'
         },
         body: JSON.stringify({ genreList: selectedGenre.map(g => g.toLowerCase()), rangeYear: years.map(y => parseInt(y, 10))} )
       })
@@ -163,7 +164,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
             });
           });
           this.sendStart( selectedGenre, years );
-          this.router.navigate(['matchmaking']);
+          this.router.navigate(['lobby/matchmaking']);
     });
     }
   }
@@ -172,7 +173,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
     fetch('https://movie.graved.ch/api/lobby/v1/lobby/quit', {
       method: 'DELETE',
       headers: {
-        'X-User': '890x'
+        'X-User': '10x'
       }
     })
       .then(req => req.json())
@@ -205,17 +206,18 @@ export class LobbyComponent implements OnInit, OnDestroy {
     const req = await fetch('https://movie.graved.ch/api/lobby/v1/lobby/getLobbyPref', {
       method: 'GET',
       headers: {
-        'X-User': '890x'
+        'X-User': '10x'
       }
     });
     return await req.json();
   }
 
   async isOwner(): Promise<boolean> {
+    await this.delay(1000);
     const req = await fetch('https://movie.graved.ch/api/lobby/v1/lobby/isOwner', {
       method: 'GET',
       headers: {
-        'X-User': '890x'
+        'X-User': '10x'
       }
     });
     const res = await req.json();
@@ -226,7 +228,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
     const req = await fetch('https://movie.graved.ch/api/lobby/v1/lobby/seeUserInLobby', {
       method: 'GET',
       headers: {
-        'X-User': '890x'
+        'X-User': '10x'
       }
     });
     const res = await req.json();
@@ -237,12 +239,31 @@ export class LobbyComponent implements OnInit, OnDestroy {
     const req = await fetch('https://movie.graved.ch/api/lobby/v1/lobby/getToken',  {
       method: 'GET',
       headers: {
-        'X-User': '890x'
+        'X-User': '10x'
       }
     });
     const res = await req.json();
     return res.token;
 
+  }
+
+  initPlayService(initDB): void {
+    console.log(initDB);
+    fetch( 'https://movie.graved.ch/api/play/v1/play/initGame', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'text/plain',
+        'X-User': '10x'
+      },
+      body: String( initDB.toString() )
+      })
+      .catch(err => {
+        console.log('err', err);
+      });
+  }
+
+  delay(ms: number): Promise<void> {
+    return new Promise( resolve => setTimeout(resolve, ms) );
   }
 
 }

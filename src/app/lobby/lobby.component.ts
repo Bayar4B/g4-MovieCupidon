@@ -14,6 +14,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
   yearUp = 2021;
   owner: boolean;
   interval: number;
+  intervalUser: number;
   initDB: string;
   check: boolean;
   users: any;
@@ -51,8 +52,11 @@ export class LobbyComponent implements OnInit, OnDestroy {
 
   async ngOnInit(): Promise<void> {
     this.owner = await this.isOwner();
-    this.users = await this.getNames();
     this.token = await this.getToken();
+
+    this.intervalUser = setInterval(async () => {
+      this.users = await this.getNames();
+    }, 5000);
 
     if ( this.owner ) {
       this.interval = setInterval(this.checkAllReady, 5000);
@@ -63,6 +67,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     clearInterval(this.interval);
+    clearInterval(this.intervalUser);
   }
 
   sendStart(selectedGenre, years): void {
@@ -184,7 +189,8 @@ export class LobbyComponent implements OnInit, OnDestroy {
       method: 'POST',
       headers: {
         'X-User': '38y'
-      }
+      },
+      body: new URLSearchParams(null )
     })
       .then(req => req.json())
       .then(res => {

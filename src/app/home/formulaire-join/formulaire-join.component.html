@@ -1,6 +1,9 @@
 <style>
 
   .column-container {
+    width: 400px;
+    max-width: 100%;
+    padding-right: 40px;
     display: flex;
     flex-direction: column;
   }
@@ -13,7 +16,7 @@
 
   .input {
     color: #FAFAFA;
-    margin: 30px;
+    margin: 10px 30px;
   }
 
 
@@ -38,6 +41,10 @@
 
   @media screen and (max-width: 700px) {
 
+    .column-container {
+      width: 280px;
+    }
+
     .input {
       justify-content: center;
       align-items: stretch;
@@ -46,7 +53,6 @@
 
     .full-container {
       flex-direction: column;
-      padding-left: 80px;
     }
 
     .button {
@@ -59,9 +65,9 @@
   }
 
 </style>
-<div class="full-container">
+<div>
 
-  <form [formGroup]="userTokenForm" (ngSubmit)="onSubmitForm()">
+  <form class="full-container" [formGroup]="userTokenForm" (ngSubmit)="onSubmitForm()">
 
     <div class="column-container">
       <mat-form-field class="input">

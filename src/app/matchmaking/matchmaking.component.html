@@ -92,8 +92,7 @@
 <div class="bg">
   <div class="container">
 
-
-
+    <div *ngIf="this.state === 'voting'">
       <div class="info-container">
 
         <mat-card class="card">
@@ -111,9 +110,6 @@
             <h2>Storyline</h2>
             <p>{{movies[this.index].overview}}</p>
 
-            <h2>Release Date</h2>
-            <p>{{movies[this.index].releaseDates}}</p>
-
             <h2>Vote Average</h2>
             <p>{{movies[this.index].voteAverage}}</p>
           </mat-card-content>
@@ -123,12 +119,32 @@
 
       <mat-slider class="mat-slide" color="primary" thumbLabel [displayWith]="formatLabel"
                   step="1" min="0" max="100" aria-label="units"
-                  [(ngModel)]="score" ></mat-slider>
-
-      <div class="button" (click)="sendScore(this.index, this.score)">Next</div>
+                  [(ngModel)]="score"></mat-slider>
 
 
+      <div *ngIf="this.score < 19">
+        <div class="button" (click)="sendScore(this.index, this.score)">Next</div>
+      </div>
+      <div *ngIf="this.score === 19">
+        <div class="button" (click)="sendScore(this.index, this.score)">Finish</div>
+      </div>
 
+    </div>
+
+    <div *ngIf="this.state === 'waiting'">
+      <p>Waiting for the result</p>
+    </div>
+
+    <div *ngIf="this.state === 'finish'">
+      <mat-card class="card">
+
+        <mat-card-header class="card-text">
+          <mat-card-title>{{movies[this.resultIndex].title}}</mat-card-title>
+        </mat-card-header>
+
+        <img mat-card-image src="{{movies[this.resultIndex].image}}">
+      </mat-card>
+    </div>
 
 
   </div>

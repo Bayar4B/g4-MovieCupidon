@@ -91,7 +91,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
       }
     });
     const res = await req.json();
-    return res.isEveryOneReady;
+    return res.isEveryoneReady;
   }
 
   gameStarted(): void {

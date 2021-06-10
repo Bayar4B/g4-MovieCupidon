@@ -3,40 +3,22 @@ import {Genre} from '../models/Genre.model';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {MovieService} from '../services/movie.service';
-import {TokenService} from '../services/token.service';
 import {Token} from '@angular/compiler';
 import {Subscription} from 'rxjs';
-import {User} from '../models/User.model';
 
 @Component({templateUrl: 'lobby.component.html'})
 
 export class LobbyComponent implements OnInit, OnDestroy {
   token: Token;
-  tokensubscription: Subscription;
   index = 0;
-  selectedGenre: Genre[];
+  selectedGenre: [];
   yearDown = 1900;
   yearUp = 2021;
-  bool: boolean;
-  owner = this.isOwner();
+  owner: boolean;
   interval: number;
   initDB: string;
   check: boolean;
-  usernames: [];
-  users = this.getNames();
-
-  // URL pour lobby service
-  startURL = 'https://movie.graved.ch/api/lobby/v1/lobby/start';
-  readyURL = 'https://movie.graved.ch/api/lobby/v1/lobby/toggleready';
-  quitURL = 'https://movie.graved.ch/api/lobby/v1/lobby/quit';
-  isOwnerURL = 'https://movie.graved.ch/api/lobby/v1/lobby/isOwner';
-  checkReadyURL = 'https://movie.graved.ch/api/lobby/v1/lobby/isEveryoneReady';
-  checkStartURL = 'https://movie.graved.ch/api/lobby/v1/lobby/hasTheGameStartYet';
-  lobbyPrefURL = 'https://movie.graved.ch/api/lobby/v1/lobby/getLobbyPref';
-  userNameURL = 'https://movie.graved.ch/api/lobby/v1/lobby/seeUserInLobby';
-  // URL pour sample service
-  sampleURL = 'https://movie.graved.ch/api/sample/v1/sample-selection/get-sample';
-  // URL pour play service
+  users: any;
 
   action = new Genre(28, 'Action');
   adventure = new Genre(12, 'Adventure');
@@ -69,8 +51,11 @@ export class LobbyComponent implements OnInit, OnDestroy {
   }
 
 
-  ngOnInit(): void {
-    if ( this.isOwner ) {
+  async ngOnInit(): Promise<void> {
+    this.owner = await this.isOwner();
+    this.users = await  this.getNames();
+
+    if ( this.owner ) {
       this.interval = setInterval(this.checkAllReady, 5000);
     } else {
       this.interval = setInterval(this.gameStarted, 5000);
@@ -86,7 +71,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
-        'X-User': '65x'
+        'X-User': '86x'
       },
       body: new URLSearchParams({ selectedGenre, years } )
     })
@@ -99,23 +84,15 @@ export class LobbyComponent implements OnInit, OnDestroy {
       });
   }
 
-  checkAllReady(): boolean {
-    console.log(this);
-    fetch('https://movie.graved.ch/api/lobby/v1/lobby/isEveryoneReady', {
+  async checkAllReady(): Promise<boolean> {
+    const req = await fetch('https://movie.graved.ch/api/lobby/v1/lobby/isEveryoneReady', {
       method: 'GET',
       headers: {
-        'X-User': '65x'
+        'X-User': '86x'
       }
-    })
-      .then(req => req.json())
-      .then(res => {
-        console.log(res);
-        this.check = res;
-      })
-      .catch(err => {
-        console.log('err', err);
-      });
-    return this.check;
+    });
+    const res = await req.json();
+    return res.isEveryOneReady;
   }
 
   gameStarted(): void {
@@ -137,10 +114,18 @@ export class LobbyComponent implements OnInit, OnDestroy {
       });
   }
 
-  sendSampleSelectionJoiner( selectedGenre, rangeYear ): void {
-    this.http.post('https://movie.graved.ch/api/sample/v1/sample-selection/get-sample', { selectedGenre, rangeYear } )
-      .subscribe((response: []) => {
-        response.forEach((m: { title: string, overview: string, vote_average: number, release_dates: string, poster_path: string }) => {
+  sendSampleSelectionJoiner( selectedGenre, years ): void {
+    fetch('https://movie.graved.ch/api/sample/v1/sample-selection/get-sample', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-User': '38y'
+      },
+      body: JSON.stringify( {genreList: selectedGenre.map(g => g.toLowerCase()), rangeYear: years.map(y => parseInt(y))} )
+    })
+      .then(req => req.json())
+      .then( res => {
+        res.forEach((m: { title: string, overview: string, vote_average: number, release_dates: string, poster_path: string }) => {
           this.movieService.addMovie({
             title: m.title,
             overview: m.overview,
@@ -152,11 +137,19 @@ export class LobbyComponent implements OnInit, OnDestroy {
       });
   }
 
-  sendSampleSelectionOwner( selectedGenre, rangeYear ): void {
+  sendSampleSelectionOwner( selectedGenre, years ): void {
     if ( this.checkAllReady ) {
-      this.http.post('https://movie.graved.ch/api/sample/v1/sample-selection/get-sample', { selectedGenre, rangeYear } )
-        .subscribe(( response: [] ) => {
-          response.forEach((m: { title: string, overview: string, vote_average: number, release_dates: string, poster_path: string }) => {
+      fetch('https://movie.graved.ch/api/sample/v1/sample-selection/get-sample', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-User': '86x'
+        },
+        body: JSON.stringify({ genreList: selectedGenre.map(g => g.toLowerCase()), rangeYear: years.map(y => parseInt(y))} )
+      })
+        .then(req => req.json())
+        .then( res => {
+          res.forEach((m: { title: string, overview: string, vote_average: number, release_dates: string, poster_path: string }) => {
             this.movieService.addMovie({
               title: m.title,
               overview: m.overview,
@@ -165,8 +158,9 @@ export class LobbyComponent implements OnInit, OnDestroy {
               image: m.poster_path,
             });
           });
+
+          this.sendStart( selectedGenre, years );
         });
-      this.sendStart( selectedGenre, rangeYear );
     }
   }
 
@@ -174,7 +168,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
     fetch('https://movie.graved.ch/api/lobby/v1/lobby/quit', {
       method: 'DELETE',
       headers: {
-        'X-User': '65x'
+        'X-User': '86x'
       }
     })
       .then(req => req.json())
@@ -206,34 +200,25 @@ export class LobbyComponent implements OnInit, OnDestroy {
     return await this.http.get('https://movie.graved.ch/api/lobby/v1/lobby/getLobbyPref').subscribe();
   }
 
-  isOwner(): boolean {
-    fetch('https://movie.graved.ch/api/lobby/v1/lobby/isOwner', {
+  async isOwner(): Promise<boolean> {
+    const req = await fetch('https://movie.graved.ch/api/lobby/v1/lobby/isOwner', {
       method: 'GET',
       headers: {
-        'X-User': '65x'
+        'X-User': '86x'
       }
-    })
-      .then(req => req.json())
-      .then(res => {
-        console.log(res);
-        this.bool = res;
-        console.log(this.bool);
-      });
-    return this.bool;
+    });
+    const res = await req.json();
+    return res.isOwner;
   }
 
-  getNames(): [] {
-    fetch('https://movie.graved.ch/api/lobby/v1/lobby/seeUserInLobby', {
+  async getNames(): Promise<any> {
+    const req = await fetch('https://movie.graved.ch/api/lobby/v1/lobby/seeUserInLobby', {
       method: 'GET',
       headers: {
-        'X-User': '65x'
+        'X-User': '86x'
       }
-    })
-      .then(req => req.json())
-      .then(res => {
-        console.log(res);
-        this.usernames = res;
-      });
-    return this.usernames;
+    });
+    const res = await req.json();
+    return res.listPlayer;
     }
 }

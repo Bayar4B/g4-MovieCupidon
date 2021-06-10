@@ -139,7 +139,7 @@
     <div class="card-style">
       <mat-card-title class="text-color space-list">Players</mat-card-title>
       <mat-list class="space-list">
-        <mat-list-item class="text-color" *ngFor="let user of users">{{ this.users[1] }}</mat-list-item>
+        <mat-list-item class="text-color" *ngFor="let user of users">{{ this.users }}</mat-list-item>
       </mat-list>
     </div>
 
@@ -148,7 +148,7 @@
 
       <mat-selection-list [(ngModel)]="selectedGenre">
         <div class="list-wrapper">
-          <mat-list-option class="text-color" *ngFor="let film of genres">
+          <mat-list-option class="text-color" *ngFor="let film of genres" [value]="film.name">
             {{film.name}}
           </mat-list-option>
         </div>
@@ -172,7 +172,6 @@
   </div>
 
   <div class="row-container">
-    {{this.owner}}
 
     <div *ngIf="this.owner === true">
       <a class="button smaller-button" mat-stroked-button routerLink="matchmaking"

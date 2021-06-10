@@ -63,7 +63,7 @@ export class MatchmakingComponent implements OnInit, OnDestroy {
   }
 
   getScore( event ): void {
-    this.score = event.value;
+    this.score = event.target.value;
   }
 
   endGame(): void {

@@ -77,7 +77,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
         'Content-Type': 'application/x-www-form-urlencoded',
         'X-User': '890x'
       },
-      body: new URLSearchParams({ selectedGenre, years } )
+      body: JSON.stringify( {genreList: selectedGenre.map(g => g.toLowerCase()), rangeYear: years.map(y => parseInt(y))} )
     })
       .then(req => req.json())
       .then(res => {

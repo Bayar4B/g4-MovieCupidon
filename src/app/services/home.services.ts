@@ -1,57 +1,53 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { Token } from '@angular/compiler';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Router} from '@angular/router';
+import {Token} from '@angular/compiler';
 
 @Injectable()
 export class HomeServices {
 
   createUrl = 'https://movie.graved.ch/api/lobby/v1/create-lobby/new-lobby';
-  joinUrl = 'https://movie.graved.ch/lobby/v1/join-lobby/join';
+  joinUrl = 'https://movie.graved.ch/api/lobby/v1/join-lobby/join';
 
   token: Token;
 
   constructor(private http: HttpClient,
-              private router: Router) {}
-
-  createGame(username: string): void {
-
-    fetch(this.createUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'X-User': '86x'
-      },
-      body: new URLSearchParams({ username })
-    })
-      .then(req => req.json())
-      .then(res => {
-        console.log(res.token);
-      })
-      .catch(err => {
-        console.log('err', err);
-      });
-    this.router.navigate(['lobby']);
+              private router: Router) {
   }
 
-  joinGame(username: string, token: string): void {
-
-    fetch(this.joinUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'X-User': '39y'
-      },
-      body: new URLSearchParams({ username, token })
-    })
-      .then(req => req.json())
-      .then(res => {
-        console.log(res.token);
-      })
-      .catch(err => {
-        console.log('err', err);
+  async createGame(username: string): Promise<any> {
+    try {
+      const req = await fetch(this.createUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'X-User': '87x'
+        },
+        body: new URLSearchParams({username})
       });
-    this.router.navigate(['lobby']);
+      const res = await req.json();
+      this.router.navigate(['lobby']);
+    } catch (err) {
+      this.router.navigate(['home']);
+    }
   }
+
+  async joinGame(username: string, token: string): Promise<any> {
+    try {
+      const req = await fetch(this.joinUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'X-User': '39y'
+        },
+        body: new URLSearchParams({username, token})
+      });
+      const res = await req.json();
+      this.router.navigate(['lobby']);
+    } catch (err) {
+      this.router.navigate(['home']);
+    }
+  }
+
 
 }

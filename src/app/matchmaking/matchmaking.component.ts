@@ -13,6 +13,8 @@ export class MatchmakingComponent implements OnInit, OnDestroy {
   movieSubscription: Subscription;
   index = 0;
   interval: number;
+  state = 'waiting';
+  resultIndex: Promise<number>;
 
   // URL pour play service
   scoreURL = 'https://movie.graved.ch/api/play/v1/play/send';
@@ -31,14 +33,19 @@ export class MatchmakingComponent implements OnInit, OnDestroy {
     return value;
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.movieSubscription = this.movieService.moviesSubject.subscribe(
       (movies: Movie[]) => {
         this.movies = movies;
       }
     );
     this.movieService.emitMovies();
-    this.interval = setInterval(this.checkAllFinished, 5000);
+    this.interval = setInterval(async () => {
+      if (await this.checkAllFinished ) {
+        this.resultIndex = this.getResult();
+        this.state = 'finish';
+      }
+    }, 5000);
   }
 
   ngOnDestroy(): void {
@@ -51,19 +58,34 @@ export class MatchmakingComponent implements OnInit, OnDestroy {
       (result) => {
         console.log(result);
       });
-    this.index++;
+    if (this.index < 19) {
+      this.index++;
+    }
+    else {
+      this.state = 'waiting';
+    }
   }
 
-  checkAllFinished(): void {
-    this.http.get(this.finishURL)
-      .subscribe(
-        (result) => {
-          console.log(result);
-        });
+  async checkAllFinished(): Promise<boolean> {
+    const req = await fetch('https://movie.graved.ch/api/play/v1/play/checkAllFinish', {
+      method: 'GET',
+      headers: {
+        'X-User': '38y'
+      }
+    });
+    const res = await req.json();
+    return res.fin; // juste checker ce que mettra kilian
   }
 
-  getScore( event ): void {
-    this.score = event.target.value;
+  async getResult(): Promise<number> {
+    const req = await fetch('https://movie.graved.ch/api/play/v1/play/getResult', {
+      method: 'GET',
+      headers: {
+        'X-User': '38y'
+      }
+    });
+    const res = await req.json();
+    return res.id; // juste checker ce que mettra kilian
   }
 
   endGame(): void {

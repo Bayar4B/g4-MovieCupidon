@@ -213,6 +213,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
   }
 
   async isOwner(): Promise<boolean> {
+    await this.delay(1000);
     const req = await fetch('https://movie.graved.ch/api/lobby/v1/lobby/isOwner', {
       method: 'GET',
       headers: {
@@ -261,6 +262,10 @@ export class LobbyComponent implements OnInit, OnDestroy {
       .catch(err => {
         console.log('err', err);
       });
+  }
+
+  delay(ms: number): Promise<void> {
+    return new Promise( resolve => setTimeout(resolve, ms) );
   }
 
 }

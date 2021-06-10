@@ -13,7 +13,7 @@ export class MatchmakingComponent implements OnInit, OnDestroy {
   movieSubscription: Subscription;
   index = 0;
   interval: number;
-  state = 'voting';
+  state = 'waiting';
   resultIndex: Promise<number>;
 
   // URL pour play service

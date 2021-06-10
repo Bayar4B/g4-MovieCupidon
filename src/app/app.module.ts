@@ -29,6 +29,7 @@ import { TokenService } from './services/token.service';
 import { AuthentificationComponent } from './authentification/authentification.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MovieService } from './services/movie.service';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 
@@ -62,7 +63,8 @@ import { MovieService } from './services/movie.service';
         MatExpansionModule,
         FormsModule,
         ReactiveFormsModule,
-        MatSelectModule
+        MatSelectModule,
+        MatProgressSpinnerModule
     ],
   providers: [
     UserService,

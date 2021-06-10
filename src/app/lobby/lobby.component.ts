@@ -82,6 +82,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
       .then(req => req.json())
       .then(res => {
         this.initDB = res;
+        this.initPlayService(this.initDB);
       })
       .catch(err => {
         console.log('err', err);
@@ -243,6 +244,23 @@ export class LobbyComponent implements OnInit, OnDestroy {
     const res = await req.json();
     return res.token;
 
+  }
+
+  initPlayService(initDB): void {
+    fetch( 'https://movie.graved.ch/api/play/v1/play/initGame', {
+      method: 'POST',
+      headers: {
+        'X-User': '890x'
+      },
+      body: new URLSearchParams( {initDB} )
+      })
+      .then(req => req.json())
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log('err', err);
+      });
   }
 
 }

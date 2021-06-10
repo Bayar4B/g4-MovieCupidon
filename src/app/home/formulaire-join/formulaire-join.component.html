@@ -7,7 +7,7 @@
 
   .full-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: row ;
     align-items: center;
   }
 
@@ -59,12 +59,11 @@
   }
 
 </style>
-<div class="column-container">
+<div class="full-container">
 
-  <div class="full-container">
+  <form [formGroup]="userTokenForm" (ngSubmit)="onSubmitForm()">
 
-    <form [formGroup]="userTokenForm" (ngSubmit)="onSubmitForm()">
-
+    <div class="column-container">
       <mat-form-field class="input">
         <mat-label>Username</mat-label>
         <label>
@@ -78,14 +77,12 @@
           <input type="text" class="form-control" formControlName="token" matInput placeholder="Ex: U1B6X">
         </label>
       </mat-form-field>
-
-
-
-    </form>
+    </div>
 
     <button class="button" mat-stroked-button
             type="submit" [disabled]="userTokenForm.invalid">Start</button>
+  </form>
 
-  </div>
 </div>
+
 

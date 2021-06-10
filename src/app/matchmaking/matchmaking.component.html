@@ -36,7 +36,8 @@
   }
 
   .card-text {
-    color: #FAFAFA; !important;
+    color: #FAFAFA;
+  !important;
     font-size: medium;
   }
 
@@ -60,6 +61,7 @@
     border-radius: 31px;
     transform: rotate(0.27deg);
   }
+
   @media screen and (max-width: 700px) {
 
     .bg {
@@ -90,41 +92,44 @@
 <div class="bg">
   <div class="container">
 
-    <div class="info-container">
 
-      <mat-card class="card">
-        <mat-card-header class="card-text">
-          <mat-card-title>{{movies[this.index].title}}</mat-card-title>
-        </mat-card-header>
 
-        <img mat-card-image src="{{movies[this.index].image}}">
-      </mat-card>
+      <div class="info-container">
 
-      <mat-card class="card">
+        <mat-card class="card">
 
-        <mat-card-content class="card-text">
-          <h2>Storyline</h2>
-          <p>{{movies[this.index].overview}}</p>
+          <mat-card-header class="card-text">
+            <mat-card-title>{{movies[this.index].title}}</mat-card-title>
+          </mat-card-header>
 
-          <h2>Release Date</h2>
-          <p>{{movies[this.index].releaseDates}}</p>
+          <img mat-card-image src="{{movies[this.index].image}}">
+        </mat-card>
 
-          <h2>Vote Average</h2>
-          <p>{{movies[this.index].voteAverage}}</p>
-        </mat-card-content>
-      </mat-card>
+        <mat-card class="card">
 
-    </div>
+          <mat-card-content class="card-text">
+            <h2>Storyline</h2>
+            <p>{{movies[this.index].overview}}</p>
 
-    {{this.index}}
+            <h2>Release Date</h2>
+            <p>{{movies[this.index].releaseDates}}</p>
 
-    <mat-slider class="mat-slide" color="primary" thumbLabel [displayWith]="formatLabel"
-                tickInterval="100" step="1000" min="0" max="100000" aria-label="units"
-                [value]="score"></mat-slider>
+            <h2>Vote Average</h2>
+            <p>{{movies[this.index].voteAverage}}</p>
+          </mat-card-content>
+        </mat-card>
 
-    {{this.score}}
+      </div>
 
-    <div class="button" (click)="sendScore(this.index, this.score)">Next</div>
+      <mat-slider class="mat-slide" color="primary" thumbLabel [displayWith]="formatLabel"
+                  step="1" min="0" max="100" aria-label="units"
+                  [(ngModel)]="score" ></mat-slider>
+
+      <div class="button" (click)="sendScore(this.index, this.score)">Next</div>
+
+
+
+
 
   </div>
 </div>

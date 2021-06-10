@@ -74,7 +74,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
     fetch('https://movie.graved.ch/api/lobby/v1/lobby/start', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/json',
         'X-User': '890x'
       },
       body: JSON.stringify( {genreList: selectedGenre.map(g => g.toLowerCase()), rangeYear: years.map(y => parseInt(y))} )

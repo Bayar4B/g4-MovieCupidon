@@ -3,13 +3,11 @@ import {Genre} from '../models/Genre.model';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {MovieService} from '../services/movie.service';
-import {Token} from '@angular/compiler';
-import {Subscription} from 'rxjs';
 
 @Component({templateUrl: 'lobby.component.html'})
 
 export class LobbyComponent implements OnInit, OnDestroy {
-  token: Token;
+  token: string;
   index = 0;
   selectedGenre: [];
   yearDown = 1900;
@@ -53,7 +51,8 @@ export class LobbyComponent implements OnInit, OnDestroy {
 
   async ngOnInit(): Promise<void> {
     this.owner = await this.isOwner();
-    this.users = await  this.getNames();
+    this.users = await this.getNames();
+    this.token = await this.getToken();
 
     if ( this.owner ) {
       this.interval = setInterval(this.checkAllReady, 5000);
@@ -71,7 +70,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
-        'X-User': '86x'
+        'X-User': '87x'
       },
       body: new URLSearchParams({ selectedGenre, years } )
     })
@@ -88,7 +87,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
     const req = await fetch('https://movie.graved.ch/api/lobby/v1/lobby/isEveryoneReady', {
       method: 'GET',
       headers: {
-        'X-User': '86x'
+        'X-User': '87x'
       }
     });
     const res = await req.json();
@@ -143,7 +142,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'X-User': '86x'
+          'X-User': '87x'
         },
         body: JSON.stringify({ genreList: selectedGenre.map(g => g.toLowerCase()), rangeYear: years.map(y => parseInt(y))} )
       })
@@ -168,7 +167,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
     fetch('https://movie.graved.ch/api/lobby/v1/lobby/quit', {
       method: 'DELETE',
       headers: {
-        'X-User': '86x'
+        'X-User': '87x'
       }
     })
       .then(req => req.json())
@@ -204,7 +203,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
     const req = await fetch('https://movie.graved.ch/api/lobby/v1/lobby/isOwner', {
       method: 'GET',
       headers: {
-        'X-User': '86x'
+        'X-User': '87x'
       }
     });
     const res = await req.json();
@@ -215,10 +214,23 @@ export class LobbyComponent implements OnInit, OnDestroy {
     const req = await fetch('https://movie.graved.ch/api/lobby/v1/lobby/seeUserInLobby', {
       method: 'GET',
       headers: {
-        'X-User': '86x'
+        'X-User': '87x'
       }
     });
     const res = await req.json();
     return res.listPlayer;
     }
+
+    async getToken(): Promise<string> {
+    const req = await fetch('https://movie.graved.ch/api/lobby/v1/lobby/getToken',  {
+      method: 'GET',
+      headers: {
+        'X-User': '87x'
+      }
+    });
+    const res = await req.json();
+    return res.token;
+
+  }
+
 }

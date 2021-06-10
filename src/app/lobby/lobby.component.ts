@@ -181,7 +181,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
 
   sendReady(): void {
     fetch('https://movie.graved.ch/api/lobby/v1/lobby/toggleready', {
-      method: 'GET',
+      method: 'POST',
       headers: {
         'X-User': '38y'
       }

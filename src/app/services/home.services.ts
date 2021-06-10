@@ -21,7 +21,7 @@ export class HomeServices {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
-        'X-User': 'r5757'
+        'X-User': '65x'
       },
       body: new URLSearchParams({ username })
     })
@@ -31,8 +31,8 @@ export class HomeServices {
       })
       .catch(err => {
         console.log('err', err);
-        this.router.navigate(['lobby']);
       });
+    this.router.navigate(['lobby']);
   }
 
   joinGame(username: string, token: string): void {
@@ -41,15 +41,18 @@ export class HomeServices {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
-        'X-User': 'r5757'
+        'X-User': '39y'
       },
       body: new URLSearchParams({ username, token })
     })
       .then(req => req.json())
-      .then(() => {
-        this.router.navigate(['lobby']);
+      .then(res => {
+        console.log(res.token);
       })
-      .catch(err => console.log('err', err));
+      .catch(err => {
+        console.log('err', err);
+      });
+    this.router.navigate(['lobby']);
   }
 
 }

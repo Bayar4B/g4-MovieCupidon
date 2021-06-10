@@ -137,7 +137,10 @@
 
   <div class="container">
     <div class="card-style">
-      <app-user-list></app-user-list>
+      <mat-card-title class="text-color space-list">Players</mat-card-title>
+      <mat-list class="space-list">
+        <mat-list-item class="text-color" *ngFor="let user of users">{{ this.users[1] }}</mat-list-item>
+      </mat-list>
     </div>
 
     <mat-card class="card-style">
@@ -169,13 +172,16 @@
   </div>
 
   <div class="row-container">
-    <div *ngIf="this.owner === false">
-      <a class="button smaller-button" mat-stroked-button routerLink="matchmaking"
-         (click)="sendReady()">Ready</a>
-    </div>
+    {{this.owner}}
+
     <div *ngIf="this.owner === true">
       <a class="button smaller-button" mat-stroked-button routerLink="matchmaking"
          (click)="sendSampleSelectionOwner(selectedGenre, [yearDown, yearUp])">Start</a>
+    </div>
+
+    <div *ngIf="this.owner === false">
+      <a class="button smaller-button" mat-stroked-button routerLink="matchmaking"
+         (click)="sendReady()">Ready</a>
     </div>
 
     <a class="button smaller-button" mat-stroked-button routerLink="home"

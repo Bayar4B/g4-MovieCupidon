@@ -21,7 +21,7 @@ export class HomeServices {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
-          'X-User': '87x'
+          'X-User': '90x'
         },
         body: new URLSearchParams({username})
       });
@@ -41,9 +41,10 @@ export class HomeServices {
           'X-User': '39y'
         },
         body: new URLSearchParams({username, token})
-      });
-      const res = await req.json();
-      this.router.navigate(['lobby']);
+      })
+        .then( ()  => {
+          this.router.navigate(['lobby']);
+        });
     } catch (err) {
       this.router.navigate(['home']);
     }

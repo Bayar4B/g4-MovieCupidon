@@ -111,7 +111,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
         const pref = await this.getLobbyPref();
         console.log('pref', pref);
         this.sendSampleSelectionJoiner(pref.genreList, pref.rangeYear);
-        this.router.navigate(['lobby']);
+        this.router.navigate(['matchmaking']);
       })
       .catch(err => {
         console.log('err', err);
@@ -163,7 +163,8 @@ export class LobbyComponent implements OnInit, OnDestroy {
             });
           });
           this.sendStart( selectedGenre, years );
-        });
+          this.router.navigate(['matchmaking']);
+    });
     }
   }
 

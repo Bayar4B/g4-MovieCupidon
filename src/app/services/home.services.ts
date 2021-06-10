@@ -32,22 +32,22 @@ export class HomeServices {
     }
   }
 
-  async joinGame(username: string, token: string): Promise<any> {
-    try {
-      const req = await fetch(this.joinUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'X-User': '39y'
-        },
-        body: new URLSearchParams({username, token})
+  async joinGame(username: string, token: string): Promise<void> {
+    const req = await fetch(this.joinUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'X-User': '39y'
+      },
+      body: new URLSearchParams({username, token})
+    })
+      .then(res => res.json())
+      .then(() => {
+        this.router.navigate(['lobby']);
       })
-        .then( ()  => {
-          this.router.navigate(['lobby']);
-        });
-    } catch (err) {
-      this.router.navigate(['home']);
-    }
+      .catch(err => {
+        this.router.navigate(['home']);
+      });
   }
 
 

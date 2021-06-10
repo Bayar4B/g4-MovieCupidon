@@ -174,14 +174,11 @@
   <div class="row-container">
 
     <div *ngIf="this.owner === true">
-      <a class="button smaller-button" mat-stroked-button routerLink="matchmaking"
-         (click)="sendSampleSelectionOwner(selectedGenre, [yearDown, yearUp])">Start</a>
+      <div class="button smaller-button" (click)="sendSampleSelectionOwner(selectedGenre, [yearDown, yearUp])">Start</div>
     </div>
 
     <div *ngIf="this.owner === false">
-      <a class="button smaller-button" mat-stroked-button routerLink="matchmaking"
-         (click)="sendReady()">Ready</a>
-    </div>
+      <div class="button smaller-button" (click)="sendReady()">Ready</div></div>
 
     <a class="button smaller-button" mat-stroked-button routerLink="home"
        (click)="sendQuit()">Quit</a>

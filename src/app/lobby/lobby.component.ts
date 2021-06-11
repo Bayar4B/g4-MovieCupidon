@@ -3,6 +3,7 @@ import {Genre} from '../models/Genre.model';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {MovieService} from '../services/movie.service';
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 @Component({templateUrl: 'lobby.component.html'})
 
@@ -51,6 +52,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
 
 
   async ngOnInit(): Promise<void> {
+     
     this.owner = await this.isOwner();
     this.token = await this.getToken();
 
@@ -253,12 +255,16 @@ export class LobbyComponent implements OnInit, OnDestroy {
   }
 
   async getLobbyPref(): Promise<Response> {
-    return await fetch('https://movie.graved.ch/api/lobby/v1/lobby/getLobbyPref', {
+    // await this.delay(1000);
+    const response = await fetch('https://movie.graved.ch/api/lobby/v1/lobby/getLobbyPref', {
       method: 'GET',
       headers: {
         'X-User': '10x'
       }
     });
+    // console.log(await response.json());
+    return response
+
   }
 
   async isOwner(): Promise<boolean> {

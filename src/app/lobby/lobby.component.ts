@@ -143,30 +143,59 @@ export class LobbyComponent implements OnInit, OnDestroy {
   }
 
   sendSampleSelectionOwner( selectedGenre, years ): void {
-    if ( this.checkAllReady ) {
-      fetch('https://movie.graved.ch/api/sample/v1/sample-selection/get-sample', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-User': '10x'
-        },
-        body: JSON.stringify({ genreList: selectedGenre.map(g => g.toLowerCase()), rangeYear: years.map(y => parseInt(y, 10))} )
-      })
-        .then(req => req.json())
-        .then( res => {
-          res.forEach((m: { title: string, overview: string, vote_average: number, release_dates: string, poster_path: string }) => {
-            this.movieService.addMovie({
-              title: m.title,
-              overview: m.overview,
-              voteAverage: m.vote_average,
-              releaseDates: m.release_dates,
-              image: m.poster_path,
+    async () => {
+      await this.checkAllReady().then(async (bool) => {
+        if (bool) {
+          await fetch('https://movie.graved.ch/api/sample/v1/sample-selection/get-sample', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-User': '10x'
+            },
+            body: JSON.stringify({ genreList: selectedGenre.map(g => g.toLowerCase()), rangeYear: years.map(y => parseInt(y, 10)) })
+          })
+            .then(req => req.json())
+            .then(res => {
+              res.forEach((m: { title: string, overview: string, vote_average: number, release_dates: string, poster_path: string }) => {
+                this.movieService.addMovie({
+                  title: m.title,
+                  overview: m.overview,
+                  voteAverage: m.vote_average,
+                  releaseDates: m.release_dates,
+                  image: m.poster_path,
+                });
+              });
+              this.sendStart(selectedGenre, years);
+              this.router.navigate(['lobby/matchmaking']);
             });
-          });
-          this.sendStart( selectedGenre, years );
-          this.router.navigate(['lobby/matchmaking']);
-    });
+        }
+        console.log('not user ready');
+      });
     }
+    // if ( this.checkAllReady ) {
+    //   fetch('https://movie.graved.ch/api/sample/v1/sample-selection/get-sample', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //       'X-User': '10x'
+    //     },
+    //     body: JSON.stringify({ genreList: selectedGenre.map(g => g.toLowerCase()), rangeYear: years.map(y => parseInt(y, 10))} )
+    //   })
+    //     .then(req => req.json())
+    //     .then( res => {
+    //       res.forEach((m: { title: string, overview: string, vote_average: number, release_dates: string, poster_path: string }) => {
+    //         this.movieService.addMovie({
+    //           title: m.title,
+    //           overview: m.overview,
+    //           voteAverage: m.vote_average,
+    //           releaseDates: m.release_dates,
+    //           image: m.poster_path,
+    //         });
+    //       });
+    //       this.sendStart( selectedGenre, years );
+    //       this.router.navigate(['lobby/matchmaking']);
+    //     });
+    // }
   }
 
   sendQuit(): void {

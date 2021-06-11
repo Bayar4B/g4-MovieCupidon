@@ -106,8 +106,8 @@ export class LobbyComponent implements OnInit, OnDestroy {
       headers: {
         'X-User': '10x'
       }
-    })
-      const req = await res.json();
+    });
+    const req = await res.json();
       // .then(async (result: []) => {
       //   const pref = await this.getLobbyPref();
       //   console.log('pref', pref);
@@ -117,12 +117,12 @@ export class LobbyComponent implements OnInit, OnDestroy {
       // .catch(err => {
       //   console.log('err', err);
       // });
-      if (req.hasTheGameStartYet){ // boolean
-        const pref = await this.getLobbyPref();
-        console.log('pref', pref);
-        this.sendSampleSelectionJoiner(pref.genreList, pref.rangeYear);
-        this.router.navigate(['lobby/matchmaking']);
-      }
+    if(req.hasTheGameStartYet){ // boolean
+      const pref = await this.getLobbyPref();
+      console.log('pref', pref);
+      this.sendSampleSelectionJoiner(pref.genreList, pref.rangeYear);
+      this.router.navigate(['lobby/matchmaking']);
+    }
   }
   // async getResult(): Promise<number> {
   //   const req = await fetch('https://movie.graved.ch/api/play/v1/play/getResult', {

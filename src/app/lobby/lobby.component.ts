@@ -100,24 +100,47 @@ export class LobbyComponent implements OnInit, OnDestroy {
     return res.isEveryoneReady;
   }
 
-  gameStarted(): void {
-    fetch('https://movie.graved.ch/api/lobby/v1/lobby/hasTheGameStartYet', {
+  async gameStarted(): Promise<void> {
+    const res = await fetch('https://movie.graved.ch/api/lobby/v1/lobby/hasTheGameStartYet', {
       method: 'GET',
       headers: {
         'X-User': '10x'
       }
-    })
-      .then(req => req.json())
-      .then(async (result: []) => {
-        const pref = await this.getLobbyPref();
-        console.log('pref', pref);
-        this.sendSampleSelectionJoiner(pref.genreList, pref.rangeYear);
-        this.router.navigate(['lobby/matchmaking']);
-      })
-      .catch(err => {
-        console.log('err', err);
+    });
+    const req = await res.json();
+    console.log('hasGameStartYet',req.hasTheGameStartYet);
+      // .then(async (result: []) => {
+      //   const pref = await this.getLobbyPref();
+      //   console.log('pref', pref);
+      //   this.sendSampleSelectionJoiner(pref.genreList, pref.rangeYear);
+      //   this.router.navigate(['lobby/matchmaking']);
+      // })
+      // .catch(err => {
+      //   console.log('err', err);
+      // });
+    if(req.hasTheGameStartYet){ // boolean
+      // const pref = this.getLobbyPref();
+      // console.log('pref', pref);
+      // this.sendSampleSelectionJoiner(pref.genreList, pref.rangeYear);
+      await this.getLobbyPref().then( async (response) =>{
+        const res = await response.json();
+        console.log('genreList',res.genreList);
+        console.log('rangeYear',res.rangeYear);
+        this.sendSampleSelectionJoiner(res.genreList,res.rangeYear);
       });
+      this.router.navigate(['lobby/matchmaking']);
+    }
   }
+  // async getResult(): Promise<number> {
+  //   const req = await fetch('https://movie.graved.ch/api/play/v1/play/getResult', {
+  //     method: 'GET',
+  //     headers: {
+  //       'X-User': '10x'
+  //     }
+  //   });
+  //   const res = await req.json();
+  //   return await res.id;
+  // }
 
   sendSampleSelectionJoiner( selectedGenre, years ): void {
     fetch('https://movie.graved.ch/api/sample/v1/sample-selection/get-sample', {
@@ -143,8 +166,12 @@ export class LobbyComponent implements OnInit, OnDestroy {
   }
 
   sendSampleSelectionOwner( selectedGenre, years ): void {
+<<<<<<< HEAD
+      this.checkAllReady().then(async (bool) => {
+=======
     async () => {
       await this.checkAllReady().then(async (bool) => {
+>>>>>>> 0989251a5da6c917b38630660538a0978e623adb
         if (bool) {
           await fetch('https://movie.graved.ch/api/sample/v1/sample-selection/get-sample', {
             method: 'POST',
@@ -171,7 +198,10 @@ export class LobbyComponent implements OnInit, OnDestroy {
         }
         console.log('not user ready');
       });
+<<<<<<< HEAD
+=======
     }
+>>>>>>> 0989251a5da6c917b38630660538a0978e623adb
     // if ( this.checkAllReady ) {
     //   fetch('https://movie.graved.ch/api/sample/v1/sample-selection/get-sample', {
     //     method: 'POST',
@@ -231,14 +261,13 @@ export class LobbyComponent implements OnInit, OnDestroy {
       });
   }
 
-  async getLobbyPref(): Promise<any> {
-    const req = await fetch('https://movie.graved.ch/api/lobby/v1/lobby/getLobbyPref', {
+  async getLobbyPref(): Promise<Response> {
+    return await fetch('https://movie.graved.ch/api/lobby/v1/lobby/getLobbyPref', {
       method: 'GET',
       headers: {
         'X-User': '10x'
       }
     });
-    return await req.json();
   }
 
   async isOwner(): Promise<boolean> {

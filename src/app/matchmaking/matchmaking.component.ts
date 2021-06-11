@@ -117,7 +117,7 @@ export class MatchmakingComponent implements OnInit, OnDestroy {
       }
     });
     const res = await req.json();
-    return res.id;
+    return await res.id;
   }
 
   // endGame(): void {

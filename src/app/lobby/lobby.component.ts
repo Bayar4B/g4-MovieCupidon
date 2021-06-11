@@ -122,10 +122,11 @@ export class LobbyComponent implements OnInit, OnDestroy {
       // const pref = this.getLobbyPref();
       // console.log('pref', pref);
       // this.sendSampleSelectionJoiner(pref.genreList, pref.rangeYear);
-      await this.getLobbyPref().then( async (json) =>{
-        console.log('genreList',json.genreList);
-        console.log('rangeYear',json.rangeYear);
-        this.sendSampleSelectionJoiner(json.genreList,json.rangeYear);
+      await this.getLobbyPref().then( async (response) =>{
+        const res = await response.json();
+        console.log('genreList',res.genreList);
+        console.log('rangeYear',res.rangeYear);
+        this.sendSampleSelectionJoiner(res.genreList,res.rangeYear);
       });
       this.router.navigate(['lobby/matchmaking']);
     }
@@ -251,14 +252,13 @@ export class LobbyComponent implements OnInit, OnDestroy {
       });
   }
 
-  async getLobbyPref(): Promise<any> {
-    const req = await fetch('https://movie.graved.ch/api/lobby/v1/lobby/getLobbyPref', {
+  async getLobbyPref(): Promise<Response> {
+    return await fetch('https://movie.graved.ch/api/lobby/v1/lobby/getLobbyPref', {
       method: 'GET',
       headers: {
         'X-User': '10x'
       }
     });
-    return await req.json();
   }
 
   async isOwner(): Promise<boolean> {

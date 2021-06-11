@@ -108,6 +108,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
       }
     });
     const req = await res.json();
+    console.log('hasGameStartYet',req.hasTheGameStartYet);
       // .then(async (result: []) => {
       //   const pref = await this.getLobbyPref();
       //   console.log('pref', pref);
@@ -118,9 +119,14 @@ export class LobbyComponent implements OnInit, OnDestroy {
       //   console.log('err', err);
       // });
     if(req.hasTheGameStartYet){ // boolean
-      const pref = await this.getLobbyPref();
-      console.log('pref', pref);
-      this.sendSampleSelectionJoiner(pref.genreList, pref.rangeYear);
+      // const pref = this.getLobbyPref();
+      // console.log('pref', pref);
+      // this.sendSampleSelectionJoiner(pref.genreList, pref.rangeYear);
+      await this.getLobbyPref().then( async (json) =>{
+        console.log('genreList',json.genreList);
+        console.log('rangeYear',json.rangeYear);
+        this.sendSampleSelectionJoiner(json.genreList,json.rangeYear);
+      });
       this.router.navigate(['lobby/matchmaking']);
     }
   }

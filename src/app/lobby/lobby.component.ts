@@ -253,12 +253,17 @@ export class LobbyComponent implements OnInit, OnDestroy {
   }
 
   async getLobbyPref(): Promise<Response> {
-    return await fetch('https://movie.graved.ch/api/lobby/v1/lobby/getLobbyPref', {
+    // await this.delay(1000);
+    const response = await fetch('https://movie.graved.ch/api/lobby/v1/lobby/getLobbyPref', {
       method: 'GET',
       headers: {
         'X-User': '10x'
       }
     });
+    console.log(await response.json());
+    
+    return response
+
   }
 
   async isOwner(): Promise<boolean> {

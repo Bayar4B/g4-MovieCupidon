@@ -14,7 +14,8 @@ export class MatchmakingComponent implements OnInit, OnDestroy {
   index = 0;
   interval: number;
   state = 'voting';
-  resultIndex: Promise<number>;
+  resultIndex: number;
+  checker: boolean;
 
   // URL pour play service
   scoreURL = 'https://movie.graved.ch/api/play/v1/play/send';
@@ -41,10 +42,23 @@ export class MatchmakingComponent implements OnInit, OnDestroy {
     );
     this.movieService.emitMovies();
     this.interval = setInterval(async () => {
-      if ( await this.checkAllFinished ) {
-        this.resultIndex = this.getResult();
-        this.state = 'finish';
-      }
+      // this.checkAllFinished();
+      // if ( this.checker ) {
+      //   console.log('checker fk',this.checker);
+      //   this.resultIndex = this.getResult();
+      //   this.state = 'finish';
+      // }
+      await this.checkAllFinished().then( async (checker) =>{
+        if(checker){
+          console.log('checker fk',checker);
+          // this.resultIndex = this.getResult();
+          await this.getResult().then( async (res) => {
+            this.resultIndex = res
+          });
+          this.state = 'finish';
+          clearInterval(this.interval);
+        }
+      });
     }, 5000);
   }
 
@@ -53,48 +67,81 @@ export class MatchmakingComponent implements OnInit, OnDestroy {
     clearInterval(this.interval);
   }
 
+  // sendScore(index, score): void {
+  //   this.http.post(`${this.scoreURL}/${index}/${score}`, null).subscribe(
+  //     (result) => {
+  //       console.log(result);
+  //     });
+  //   if (this.index < 19) {
+  //     this.index++;
+  //   }
+  //   else {
+  //     this.state = 'waiting';
+  //   }
+  // }
   sendScore(index, score): void {
-    this.http.post(`${this.scoreURL}/${index}/${score}`, null).subscribe(
-      (result) => {
-        console.log(result);
+    fetch(`${this.scoreURL}/${index}/${score}`, {
+      method: 'POST',
+      headers: {
+        'X-User': '10x'
+      },
+      body: String(null)
+    })
+      .then(() => {
+        if (this.index < 19) {
+          this.index++;
+        }
+        else {
+          this.state = 'waiting';
+        }
       });
-    if (this.index < 19) {
-      this.index++;
-    }
-    else {
-      this.state = 'waiting';
-    }
   }
-
+  
   async checkAllFinished(): Promise<boolean> {
     const req = await fetch('https://movie.graved.ch/api/play/v1/play/checkAllFinish', {
       method: 'GET',
       headers: {
-        'X-User': '38y'
+        'X-User': '10x'
       }
     });
     const res = await req.json();
-    return res.fin;
+    console.log('resfk',res.fin);
+    return await res.fin;
   }
 
   async getResult(): Promise<number> {
     const req = await fetch('https://movie.graved.ch/api/play/v1/play/getResult', {
       method: 'GET',
       headers: {
-        'X-User': '38y'
+        'X-User': '10x'
       }
     });
     const res = await req.json();
     return res.id;
   }
 
+  // endGame(): void {
+  //   this.http.delete(this.endGameURL)
+  //     .subscribe(
+  //       (result) => {
+  //         console.log(result);
+  //       });
+  // }
   endGame(): void {
-    this.http.delete(this.endGameURL)
-      .subscribe(
-        (result) => {
-          console.log(result);
-        });
-  }
+    fetch( 'https://movie.graved.ch/api/lobby/v1/lobby/endGameDeletion', {
+      method: 'DELETE',
+      headers: {
+        'X-User': '10x'
+      }
+    }).then(req => req.json())
+      .then(res => {
+        console.log(res);
+
+      })
+      .catch(err => {
+        console.log('err', err);
+      });
+  } 
 
 }
 

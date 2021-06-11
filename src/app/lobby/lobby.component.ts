@@ -104,7 +104,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
     fetch('https://movie.graved.ch/api/lobby/v1/lobby/hasTheGameStartYet', {
       method: 'GET',
       headers: {
-        'X-User': '38y'
+        'X-User': '10x'
       }
     })
       .then(req => req.json())
@@ -124,7 +124,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'X-User': '38y'
+        'X-User': '10x'
       },
       body: JSON.stringify( {genreList: selectedGenre.map(g => g.toLowerCase()), rangeYear: years.map(y => parseInt(y, 10))} )
     })

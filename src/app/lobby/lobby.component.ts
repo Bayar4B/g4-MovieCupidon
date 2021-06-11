@@ -100,24 +100,40 @@ export class LobbyComponent implements OnInit, OnDestroy {
     return res.isEveryoneReady;
   }
 
-  gameStarted(): void {
-    fetch('https://movie.graved.ch/api/lobby/v1/lobby/hasTheGameStartYet', {
+  async gameStarted(): Promise<void> {
+    const res = await fetch('https://movie.graved.ch/api/lobby/v1/lobby/hasTheGameStartYet', {
       method: 'GET',
       headers: {
         'X-User': '10x'
       }
     })
-      .then(req => req.json())
-      .then(async (result: []) => {
+      const req = await res.json();
+      // .then(async (result: []) => {
+      //   const pref = await this.getLobbyPref();
+      //   console.log('pref', pref);
+      //   this.sendSampleSelectionJoiner(pref.genreList, pref.rangeYear);
+      //   this.router.navigate(['lobby/matchmaking']);
+      // })
+      // .catch(err => {
+      //   console.log('err', err);
+      // });
+      if (req.hasTheGameStartYet){ // boolean
         const pref = await this.getLobbyPref();
         console.log('pref', pref);
         this.sendSampleSelectionJoiner(pref.genreList, pref.rangeYear);
         this.router.navigate(['lobby/matchmaking']);
-      })
-      .catch(err => {
-        console.log('err', err);
-      });
+      }
   }
+  // async getResult(): Promise<number> {
+  //   const req = await fetch('https://movie.graved.ch/api/play/v1/play/getResult', {
+  //     method: 'GET',
+  //     headers: {
+  //       'X-User': '10x'
+  //     }
+  //   });
+  //   const res = await req.json();
+  //   return await res.id;
+  // }
 
   sendSampleSelectionJoiner( selectedGenre, years ): void {
     fetch('https://movie.graved.ch/api/sample/v1/sample-selection/get-sample', {

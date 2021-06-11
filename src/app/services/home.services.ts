@@ -21,7 +21,7 @@ export class HomeServices {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
-          'X-User': '90x'
+          'X-User': '10x'
         },
         body: new URLSearchParams({username})
       });
@@ -37,7 +37,7 @@ export class HomeServices {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
-        'X-User': '39y'
+        'X-User': '10x'
       },
       body: new URLSearchParams({username, token})
     })

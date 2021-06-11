@@ -13,9 +13,9 @@ export class AppComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.http.get('https://movie.graved.ch/oauth2/userinfo')
+    /*this.http.get('https://movie.graved.ch/oauth2/userinfo')
       .subscribe( () => {
         this.login = true;
-        });
+        });*/
   }
 }

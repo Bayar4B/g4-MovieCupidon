@@ -143,8 +143,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
   }
 
   sendSampleSelectionOwner( selectedGenre, years ): void {
-    async () => {
-      await this.checkAllReady().then(async (bool) => {
+      this.checkAllReady().then(async (bool) => {
         if (bool) {
           await fetch('https://movie.graved.ch/api/sample/v1/sample-selection/get-sample', {
             method: 'POST',
@@ -171,7 +170,6 @@ export class LobbyComponent implements OnInit, OnDestroy {
         }
         console.log('not user ready');
       });
-    }
     // if ( this.checkAllReady ) {
     //   fetch('https://movie.graved.ch/api/sample/v1/sample-selection/get-sample', {
     //     method: 'POST',

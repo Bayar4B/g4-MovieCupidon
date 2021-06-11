@@ -112,7 +112,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
         const pref = await this.getLobbyPref();
         console.log('pref', pref);
         this.sendSampleSelectionJoiner(pref.genreList, pref.rangeYear);
-        this.router.navigate(['matchmaking']);
+        this.router.navigate(['lobby/matchmaking']);
       })
       .catch(err => {
         console.log('err', err);
